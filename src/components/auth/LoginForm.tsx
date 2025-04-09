@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2 } from 'lucide-react';
+import { Loader2, UserCheck } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const { signIn, signUp } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { signIn, signUp, user, isAdmin, isLoading } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Monitor auth state
+  useEffect(() => {
+    if (!isLoading && user && isAdmin) {
+      // If user is logged in and is admin, navigate to admin dashboard
+      console.log('User logged in and is admin, redirecting to dashboard');
+      navigate('/admin', { replace: true });
+    }
+  }, [user, isAdmin, isLoading, navigate]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     
     try {
-      setIsLoading(true);
+      setIsSubmitting(true);
       const result = await signIn(email, password);
       
       if (result.error) {
@@ -31,13 +42,8 @@ const LoginForm: React.FC = () => {
           description: result.error.message || 'فشل تسجيل الدخول، يرجى التحقق من بيانات الاعتماد والمحاولة مرة أخرى.',
           variant: 'destructive',
         });
-      } else {
-        toast({
-          title: 'تم تسجيل الدخول بنجاح',
-          description: 'مرحباً بك في لوحة التحكم',
-        });
-        navigate('/admin');
       }
+      // Navigation will be handled by the useEffect monitoring auth state
     } catch (error) {
       console.error('Login error:', error);
       toast({
@@ -46,7 +52,7 @@ const LoginForm: React.FC = () => {
         variant: 'destructive',
       });
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -72,7 +78,7 @@ const LoginForm: React.FC = () => {
     }
     
     try {
-      setIsLoading(true);
+      setIsSubmitting(true);
       const result = await signUp(email, password);
       
       if (result.error) {
@@ -96,9 +102,37 @@ const LoginForm: React.FC = () => {
         variant: 'destructive',
       });
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
+
+  // If the user is logged in but not admin, show a message
+  if (!isLoading && user && !isAdmin) {
+    return (
+      <Card className="w-full max-w-md mx-auto">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl crypto-text-gradient">حساب غير مصرح</CardTitle>
+          <CardDescription>ليس لديك صلاحيات الوصول للوحة التحكم</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Alert className="mb-4">
+            <UserCheck className="h-4 w-4 ml-2" />
+            <AlertDescription>
+              أنت مسجل الدخول كـ {user.email}، لكن هذا الحساب ليس لديه صلاحيات المسؤول.
+              يرجى التواصل مع مسؤول الموقع للحصول على الصلاحيات المناسبة.
+            </AlertDescription>
+          </Alert>
+          <Button 
+            variant="default" 
+            className="w-full"
+            onClick={() => navigate('/')}
+          >
+            العودة للموقع الرئيسي
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full max-w-md mx-auto">
@@ -124,6 +158,7 @@ const LoginForm: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="space-y-2">
@@ -135,10 +170,11 @@ const LoginForm: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
-              <Button type="submit" className="w-full crypto-gradient" disabled={isLoading}>
-                {isLoading ? (
+              <Button type="submit" className="w-full crypto-gradient" disabled={isSubmitting}>
+                {isSubmitting ? (
                   <>
                     <Loader2 className="ml-2 h-4 w-4 animate-spin" />
                     جاري تسجيل الدخول...
@@ -161,6 +197,7 @@ const LoginForm: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="space-y-2">
@@ -172,10 +209,11 @@ const LoginForm: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
-              <Button type="submit" className="w-full crypto-gradient" disabled={isLoading}>
-                {isLoading ? (
+              <Button type="submit" className="w-full crypto-gradient" disabled={isSubmitting}>
+                {isSubmitting ? (
                   <>
                     <Loader2 className="ml-2 h-4 w-4 animate-spin" />
                     جاري إنشاء الحساب...

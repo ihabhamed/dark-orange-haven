@@ -145,39 +145,51 @@ export type Database = {
         Row: {
           created_at: string | null
           description: string | null
+          discount_badge: string | null
           display_order: number | null
           duration: string | null
           featured: boolean | null
           features: Json | null
+          full_description: string | null
           icon: string | null
           id: string
+          old_price: string | null
           price: string | null
+          slug: string | null
           title: string
           updated_at: string | null
         }
         Insert: {
           created_at?: string | null
           description?: string | null
+          discount_badge?: string | null
           display_order?: number | null
           duration?: string | null
           featured?: boolean | null
           features?: Json | null
+          full_description?: string | null
           icon?: string | null
           id?: string
+          old_price?: string | null
           price?: string | null
+          slug?: string | null
           title: string
           updated_at?: string | null
         }
         Update: {
           created_at?: string | null
           description?: string | null
+          discount_badge?: string | null
           display_order?: number | null
           duration?: string | null
           featured?: boolean | null
           features?: Json | null
+          full_description?: string | null
           icon?: string | null
           id?: string
+          old_price?: string | null
           price?: string | null
+          slug?: string | null
           title?: string
           updated_at?: string | null
         }

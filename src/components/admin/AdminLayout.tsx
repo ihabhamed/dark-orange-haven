@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from '@/components/auth/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -27,16 +27,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const { isAdmin, isLoading, user, signOut } = useAuth();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [showNoAdminAlert, setShowNoAdminAlert] = useState(false);
 
-  useEffect(() => {
-    // If user is logged in but not admin, show the alert
-    if (!isLoading && user && !isAdmin) {
-      setShowNoAdminAlert(true);
-    } else {
-      setShowNoAdminAlert(false);
-    }
-  }, [isLoading, user, isAdmin]);
+  console.log('AdminLayout - auth state:', { isAdmin, isLoading, user: !!user });
 
   // Loading state
   if (isLoading) {
@@ -49,11 +41,13 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
   // No user, redirect to login
   if (!user) {
+    console.log('No user, redirecting to login');
     return <Navigate to="/admin/login" />;
   }
 
   // User is not admin, but is logged in
   if (!isAdmin && user) {
+    console.log('User is not admin, showing unauthorized message');
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-crypto-dark p-4">
         <Alert variant="destructive" className="max-w-md">
@@ -74,6 +68,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       </div>
     );
   }
+
+  // At this point, user is logged in and is admin
+  console.log('User is admin, showing admin layout');
 
   const navigation = [
     { name: 'لوحة التحكم', href: '/admin', icon: LayoutDashboard },

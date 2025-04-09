@@ -50,51 +50,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // Function to handle auth state change
+  const handleAuthChange = async (currentSession: Session | null) => {
+    setSession(currentSession);
+    
+    if (currentSession?.user) {
+      setUser(currentSession.user);
+      
+      // Check if user is admin after setting the user
+      const isUserAdmin = await checkUserRole(currentSession.user.id);
+      console.log('User admin status:', isUserAdmin);
+      setIsAdmin(isUserAdmin);
+    } else {
+      setUser(null);
+      setIsAdmin(false);
+    }
+    
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const initializeAuth = async () => {
-      try {
-        setIsLoading(true);
-        
-        // Get the current session
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
-        if (error) {
-          throw error;
-        }
-        
-        if (session) {
-          setSession(session);
-          setUser(session.user);
-          
-          // Check if user is admin
-          const isUserAdmin = await checkUserRole(session.user.id);
-          setIsAdmin(isUserAdmin);
-        }
-      } catch (error) {
-        console.error('Error getting session:', error);
-      } finally {
-        setIsLoading(false);
+    console.log('Auth provider initializing');
+    setIsLoading(true);
+    
+    // Set up auth state change listener first
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      async (event, currentSession) => {
+        console.log('Auth state changed:', event);
+        await handleAuthChange(currentSession);
       }
-    };
+    );
 
-    // Set up auth state change listener
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      if (session?.user) {
-        // Check if user is admin
-        const isUserAdmin = await checkUserRole(session.user.id);
-        setIsAdmin(isUserAdmin);
-      } else {
-        setIsAdmin(false);
-      }
-      
-      setIsLoading(false);
+    // Then check for existing session
+    supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
+      console.log('Initial session check:', currentSession ? 'Session exists' : 'No session');
+      await handleAuthChange(currentSession);
     });
-
-    // Initialize authentication
-    initializeAuth();
 
     return () => {
       authListener.subscription.unsubscribe();
@@ -103,17 +94,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = async (email: string, password: string): Promise<AuthResult> => {
     try {
+      console.log('Signing in user:', email);
+      setIsLoading(true);
+      
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       
       if (error) {
+        console.error('Sign in error:', error);
         toast({
           title: 'خطأ في تسجيل الدخول',
           description: error.message,
           variant: 'destructive',
         });
+        setIsLoading(false);
         return { error };
       }
       
+      // Session will be handled by the onAuthStateChange listener
+      console.log('Sign in successful');
       toast({
         title: 'تم تسجيل الدخول بنجاح',
         description: 'مرحبًا بك في لوحة التحكم',
@@ -122,53 +120,73 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return { error: null };
     } catch (error: any) {
       console.error('Error signing in:', error);
+      setIsLoading(false);
       return { error: { message: error.message || 'حدث خطأ غير متوقع' } };
     }
   };
 
   const signUp = async (email: string, password: string): Promise<AuthResult> => {
     try {
+      console.log('Signing up user:', email);
+      setIsLoading(true);
+      
       const { data, error } = await supabase.auth.signUp({ email, password });
       
       if (error) {
+        console.error('Sign up error:', error);
         toast({
           title: 'خطأ في إنشاء الحساب',
           description: error.message,
           variant: 'destructive',
         });
+        setIsLoading(false);
         return { error };
       }
       
+      // Session will be handled by the onAuthStateChange listener if email confirmation is disabled
+      console.log('Sign up successful');
       toast({
         title: 'تم إنشاء الحساب بنجاح',
         description: 'تم إرسال رابط التأكيد إلى بريدك الإلكتروني',
       });
       
+      setIsLoading(false);
       return { error: null };
     } catch (error: any) {
       console.error('Error signing up:', error);
+      setIsLoading(false);
       return { error: { message: error.message || 'حدث خطأ غير متوقع' } };
     }
   };
 
   const signOut = async () => {
     try {
+      console.log('Signing out user');
+      setIsLoading(true);
+      
       const { error } = await supabase.auth.signOut();
       
       if (error) {
+        console.error('Sign out error:', error);
         toast({
           title: 'خطأ في تسجيل الخروج',
           description: error.message,
           variant: 'destructive',
         });
+        setIsLoading(false);
         throw error;
       }
       
+      // Session will be handled by the onAuthStateChange listener
+      console.log('Sign out successful');
       toast({
         title: 'تم تسجيل الخروج بنجاح',
       });
+      
+      return;
     } catch (error) {
       console.error('Error signing out:', error);
+      setIsLoading(false);
       throw error;
     }
   };
