@@ -9,15 +9,20 @@ export const useAdminCheck = () => {
   const checkUserRole = async (userId: string): Promise<boolean> => {
     try {
       const { data: userRoles, error: rolesError } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', userId)
-        .eq('role', 'admin')
-        .single();
+  .from('user_roles')
+  .select('role')
+  .eq('user_id', userId)
+  .maybeSingle();
+      
 // console code GPT test
-      console.log("🔍 checkUserRole => userId:", userId);
-      console.log("📦 Role fetched:", userRoles);
-      console.log("❌ Role fetch error:", rolesError);
+
+console.log("🔍 checkUserRole => userId:", userId);
+console.log("📦 Role fetched:", userRoles);
+console.log("❌ Role fetch error:", rolesError);
+
+return userRoles?.role === 'admin';
+
+  
 
       
       if (rolesError && rolesError.code !== 'PGRST116') {
