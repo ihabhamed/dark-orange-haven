@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { useAdminCheck } from './useAdminCheck';
 
+console.log("🔥 useAuthStateChange.ts loaded ✅"); // ⬅️ أول ما الملف يتنفذ
+
 /**
  * Hook to handle authentication state changes
  */
@@ -17,7 +19,7 @@ export const useAuthStateChange = () => {
 
   // ✅ اختبار الدالة راجعة ولا لا
   console.log("🔄 useAdminCheck() returned:", adminCheckResult);
-  console.log("🔧 checkUserRole function is:", checkUserRole);
+  console.log("🔧 checkUserRole function is:", typeof checkUserRole);
 
   // ✅ Function runs on auth state change (e.g. sign in)
   const handleAuthChange = useCallback(async (currentSession: Session | null) => {
