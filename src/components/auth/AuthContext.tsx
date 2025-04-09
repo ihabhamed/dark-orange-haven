@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
@@ -25,7 +24,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     console.log('Auth provider initializing');
     setIsLoading(true);
     
-    // Set up auth state change listener first
+    // ✅ Setup auth state change listener
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, currentSession) => {
         console.log('Auth state changed:', event);
@@ -33,26 +32,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     );
 
-    Then check for existing session
-    supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
-      console.log('Initial session check:', currentSession ? 'Session exists' : 'No session');
-      await handleAuthChange(currentSession);
-    });
-
-    // Then check for existing session
+    // ✅ Check for existing session on load
     supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
       console.log("📦 Current session (from getSession):", currentSession);
       console.log("🧠 User ID (from getSession):", currentSession?.user?.id);
       await handleAuthChange(currentSession);
     });
 
-    
     return () => {
       authListener.subscription.unsubscribe();
     };
   }, []);
 
-  // Log the current auth context state for debugging
+  // 🐞 Log the current auth context state
   console.log('Auth context state:', { isLoading, user: !!user, isAdmin, authChecked });
 
   return (
