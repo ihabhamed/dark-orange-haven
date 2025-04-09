@@ -26,7 +26,9 @@ export const useAuthStateChange = () => {
       try {
         // Check if user is admin after setting the user
         const isUserAdmin = await checkUserRole(currentSession.user.id);
-        console.log('User admin status:', isUserAdmin);
+        console.log('🔍 Admin Check → User ID:', currentSession.user.id);
+        console.log('🧠 Admin Check → Returned:', isUserAdmin);
+
         setIsAdmin(isUserAdmin);
       } catch (error) {
         console.error('Error checking admin status:', error);
