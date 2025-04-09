@@ -20,10 +20,10 @@ const Services = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="crypto-text-gradient">Crypto Services</span> Tailored To Your Needs
+                <span className="crypto-text-gradient">خدماتنا المميزة</span> في عالم الكريبتو
               </h1>
               <p className="text-xl text-white/80 mb-8">
-                From one-on-one coaching to comprehensive courses, I offer a range of services designed to help you succeed in your crypto journey.
+                من جلسات التدريب الفردية إلى الدورات الشاملة، نقدم مجموعة متنوعة من الخدمات المصممة لمساعدتك على النجاح في رحلتك مع العملات الرقمية.
               </p>
             </div>
           </div>
@@ -33,8 +33,8 @@ const Services = () => {
         <section className="py-16 bg-crypto-dark">
           <div className="container mx-auto px-4">
             <SectionHeading 
-              title="Available Services" 
-              subtitle="Expert guidance and education to help you thrive in the crypto space"
+              title="الخدمات المتاحة" 
+              subtitle="توجيهات وتعليم متخصص لمساعدتك على النجاح في عالم العملات الرقمية"
               centered
             />
             
@@ -58,14 +58,14 @@ const Services = () => {
             <div className="glass-card p-8 md:p-12 rounded-2xl max-w-4xl mx-auto">
               <div className="text-center">
                 <h2 className="text-3xl font-bold mb-6 crypto-text-gradient">
-                  Not Sure Which Service Is Right For You?
+                  غير متأكد من الخدمة المناسبة لك؟
                 </h2>
                 <p className="text-white/80 text-lg mb-8">
-                  Let's discuss your specific needs and find the perfect solution to help you achieve your crypto goals.
+                  دعنا نناقش احتياجاتك الخاصة ونجد الحل المثالي لمساعدتك في تحقيق أهدافك في مجال العملات الرقمية.
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center">
                   <Button className="crypto-gradient" asChild>
-                    <Link to="/contact">Schedule a Free Consultation</Link>
+                    <Link to="/contact">احجز استشارة مجانية</Link>
                   </Button>
                 </div>
               </div>

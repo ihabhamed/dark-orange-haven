@@ -81,7 +81,7 @@ export default {
 					'100%': { opacity: '1', transform: 'translateY(0)' }
 				},
 				'slide-in': {
-					'0%': { transform: 'translateX(-100%)' },
+					'0%': { transform: 'translateX(100%)' },
 					'100%': { transform: 'translateX(0)' }
 				}
 			},
@@ -92,7 +92,8 @@ export default {
 				'slide-in': 'slide-in 0.5s ease-out'
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif']
+				sans: ['Inter', 'sans-serif'],
+				arabic: ['Tajawal', 'Inter', 'sans-serif']
 			}
 		}
 	},

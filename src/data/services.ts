@@ -12,47 +12,47 @@ export interface Service {
 export const services: Service[] = [
   {
     id: "coaching",
-    title: "One-on-One Coaching",
-    description: "Personalized coaching sessions to guide you through the crypto market with expert insights and strategies.",
-    fullDescription: "Get personalized guidance from an expert with years of experience in the crypto market. During these one-on-one sessions, I'll help you develop a personalized strategy based on your goals, risk tolerance, and market conditions. Whether you're looking to optimize your portfolio, learn advanced trading techniques, or understand complex DeFi protocols, these sessions are tailored to your specific needs. Includes follow-up support via email for one week after each session.",
-    price: "$299 / session",
-    duration: "90 minutes",
+    title: "جلسات تدريب فردية",
+    description: "جلسات تدريب شخصية لإرشادك في سوق العملات الرقمية مع رؤى واستراتيجيات خبير.",
+    fullDescription: "احصل على توجيه شخصي من خبير ذو سنوات من الخبرة في سوق العملات الرقمية. خلال هذه الجلسات الفردية، سأساعدك في تطوير استراتيجية شخصية بناءً على أهدافك وقدرتك على تحمل المخاطر وظروف السوق. سواء كنت تتطلع إلى تحسين محفظتك، أو تعلم تقنيات التداول المتقدمة، أو فهم بروتوكولات DeFi المعقدة، فإن هذه الجلسات مصممة خصيصًا لاحتياجاتك المحددة. تشمل دعمًا متابعًا عبر البريد الإلكتروني لمدة أسبوع بعد كل جلسة.",
+    price: "299 دولار / للجلسة",
+    duration: "90 دقيقة",
     featured: true
   },
   {
     id: "beginner-course",
-    title: "Beginner Crypto Course",
-    description: "A comprehensive introduction to cryptocurrency, blockchain technology, and the fundamentals of digital assets.",
-    fullDescription: "This beginner-friendly course covers everything you need to know to start your crypto journey with confidence. From understanding blockchain technology to setting up secure wallets and making your first transactions, this course provides a solid foundation. Topics include: cryptocurrency fundamentals, secure storage solutions, basic trading concepts, risk management, and how to research projects effectively. Includes lifetime access to course materials and a private community for ongoing support.",
-    price: "$199",
-    duration: "6 weeks",
+    title: "دورة مبتدئين في الكريبتو",
+    description: "مقدمة شاملة للعملات الرقمية، وتقنية البلوكتشين، وأساسيات الأصول الرقمية.",
+    fullDescription: "تغطي هذه الدورة السهلة للمبتدئين كل ما تحتاج لمعرفته لبدء رحلتك في العملات الرقمية بثقة. من فهم تقنية البلوكتشين إلى إعداد محافظ آمنة وإجراء معاملاتك الأولى، توفر هذه الدورة أساسًا قويًا. تشمل الموضوعات: أساسيات العملات الرقمية، حلول التخزين الآمن، مفاهيم التداول الأساسية، إدارة المخاطر، وكيفية البحث في المشاريع بشكل فعال. تتضمن الوصول مدى الحياة إلى مواد الدورة ومجتمع خاص للدعم المستمر.",
+    price: "199 دولار",
+    duration: "6 أسابيع",
     featured: true
   },
   {
     id: "advanced-course",
-    title: "Advanced Crypto Course",
-    description: "Deep dive into advanced crypto strategies, DeFi protocols, yield farming, and technical analysis.",
-    fullDescription: "Take your crypto knowledge to the next level with this advanced course designed for those who already understand the basics. Explore complex topics like DeFi yield strategies, cross-chain bridging, automated trading systems, advanced technical analysis, and tokenomics evaluation. Learn how to identify emerging trends before they become mainstream and develop sophisticated strategies for different market conditions. Includes practical exercises, case studies, and personalized feedback on your strategic plans.",
-    price: "$499",
-    duration: "8 weeks",
+    title: "دورة متقدمة في الكريبتو",
+    description: "تعمق في استراتيجيات الكريبتو المتقدمة، بروتوكولات DeFi، التحليل الفني والتقني.",
+    fullDescription: "ارفع معرفتك بالعملات الرقمية إلى المستوى التالي مع هذه الدورة المتقدمة المصممة للذين يفهمون بالفعل الأساسيات. استكشف موضوعات معقدة مثل استراتيجيات عائد DeFi، الربط عبر السلاسل، أنظمة التداول الآلي، التحليل الفني المتقدم، وتقييم الاقتصاد الرمزي. تعلم كيفية تحديد الاتجاهات الناشئة قبل أن تصبح سائدة وتطوير استراتيجيات متطورة لظروف السوق المختلفة. يشمل تمارين عملية، ودراسات حالة، وتعليقات شخصية على خططك الاستراتيجية.",
+    price: "499 دولار",
+    duration: "8 أسابيع",
     featured: true
   },
   {
     id: "onchain-analysis",
-    title: "On-Chain Analysis Course",
-    description: "Learn how to read and interpret on-chain data to make informed investment decisions ahead of the market.",
-    fullDescription: "On-chain analysis is one of the most powerful tools for gaining an edge in the crypto market. This specialized course teaches you how to extract and interpret blockchain data to identify significant market trends and opportunities before they become apparent through price action. You'll learn how to use advanced tools like Glassnode, Nansen, and Dune Analytics, understand key metrics such as exchange flows and active addresses, and develop strategies based on on-chain signals. Includes access to custom dashboard templates and weekly on-chain analysis sessions.",
-    price: "$399",
-    duration: "6 weeks",
+    title: "دورة تحليل أون-تشين",
+    description: "تعلم كيفية قراءة وتفسير بيانات السلسلة لاتخاذ قرارات استثمارية مستنيرة قبل السوق.",
+    fullDescription: "تحليل السلسلة هو أحد أقوى الأدوات للحصول على ميزة في سوق العملات الرقمية. تعلمك هذه الدورة المتخصصة كيفية استخراج وتفسير بيانات البلوكتشين لتحديد اتجاهات وفرص السوق المهمة قبل أن تصبح واضحة من خلال حركة السعر. ستتعلم كيفية استخدام أدوات متقدمة مثل Glassnode وNansen وDune Analytics، وفهم المقاييس الرئيسية مثل تدفقات البورصة والعناوين النشطة، وتطوير استراتيجيات استنادًا إلى إشارات السلسلة. يشمل الوصول إلى قوالب لوحة معلومات مخصصة وجلسات تحليل سلسلة أسبوعية.",
+    price: "399 دولار",
+    duration: "6 أسابيع",
     featured: true
   },
   {
     id: "consulting",
-    title: "Personalized Consulting",
-    description: "Strategic consulting for crypto projects, businesses, and high-net-worth individuals navigating the digital asset space.",
-    fullDescription: "Custom consulting services for projects, companies, and individuals requiring specialized crypto expertise. Whether you're launching a new token, integrating blockchain into your business, or managing a significant crypto portfolio, I provide tailored strategies and solutions. Services include tokenomics design, go-to-market strategies for crypto projects, investment thesis development, security audits, and custom research reports. Each consulting package is uniquely designed to address your specific challenges and objectives.",
-    price: "Custom pricing",
-    duration: "Variable",
+    title: "استشارات مخصصة",
+    description: "استشارات استراتيجية لمشاريع الكريبتو، والشركات، والأفراد ذوي الثروة العالية في مجال الأصول الرقمية.",
+    fullDescription: "خدمات استشارية مخصصة للمشاريع والشركات والأفراد الذين يحتاجون إلى خبرة متخصصة في العملات الرقمية. سواء كنت تطلق رمزًا جديدًا، أو تدمج البلوكتشين في عملك، أو تدير محفظة كريبتو كبيرة، فأنا أقدم استراتيجيات وحلولًا مصممة خصيصًا. تشمل الخدمات تصميم اقتصاديات التوكن، واستراتيجيات دخول السوق لمشاريع الكريبتو، وتطوير أطروحات الاستثمار، وتدقيقات الأمان، وتقارير البحث المخصصة. كل حزمة استشارية مصممة بشكل فريد لمعالجة تحدياتك وأهدافك المحددة.",
+    price: "تسعير مخصص",
+    duration: "متغير",
     featured: false
   }
 ];
