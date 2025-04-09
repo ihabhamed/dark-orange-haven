@@ -34,10 +34,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
 
     // Then check for existing session
-    supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
-      console.log('Initial session check:', currentSession ? 'Session exists' : 'No session');
-      await handleAuthChange(currentSession);
-    });
+    // supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
+    //   console.log('Initial session check:', currentSession ? 'Session exists' : 'No session');
+    //   await handleAuthChange(currentSession);
+    // });
 
     return () => {
       authListener.subscription.unsubscribe();
