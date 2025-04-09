@@ -23,13 +23,13 @@ const LoginForm: React.FC = () => {
   console.log('LoginForm render state:', { isLoading, authChecked, user: !!user, isAdmin });
 
   // Monitor auth state for redirection
-  useEffect(() => {
-    // Only redirect when auth check is complete AND user is admin
-    if (authChecked && user && isAdmin) {
-      console.log('User logged in and is admin, redirecting to dashboard');
+useEffect(() => {
+  if (!isLoading && user !== undefined && isAdmin !== undefined) {
+    if (user && isAdmin) {
       navigate('/admin', { replace: true });
     }
-  }, [user, isAdmin, authChecked, navigate]);
+  }
+}, [user, isAdmin, isLoading, navigate]);
 
   // Show appropriate UI based on auth state
   if (isLoading) {
