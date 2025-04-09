@@ -20,15 +20,15 @@ const About = () => {
             <div className="flex flex-col md:flex-row gap-12 items-center">
               <div className="w-full md:w-1/2">
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                  <span className="crypto-text-gradient">About Me</span>
+                  <span className="crypto-text-gradient">من أنا</span>
                 </h1>
                 <p className="text-xl text-white/80 mb-8">
-                  I'm a cryptocurrency expert, educator, and consultant with a passion for helping others navigate the complex world of digital assets.
+                  أنا خبير في العملات الرقمية، معلم ومستشار، لدي شغف بمساعدة الآخرين في التنقل في عالم الأصول الرقمية المعقد.
                 </p>
                 <Button className="crypto-gradient group" asChild>
                   <Link to="/contact">
-                    <span className="mr-2">Get in Touch</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <span className="ml-2">تواصل معي</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl-flip" />
                   </Link>
                 </Button>
               </div>
@@ -50,33 +50,33 @@ const About = () => {
         <section className="py-16 bg-crypto-dark">
           <div className="container mx-auto px-4">
             <SectionHeading 
-              title="My Story" 
-              subtitle="How I became a crypto expert and what drives my passion"
+              title="قصتي" 
+              subtitle="كيف أصبحت خبيراً في العملات الرقمية وما الذي يحرك شغفي"
               centered
             />
             
             <div className="max-w-3xl mx-auto">
               <p className="text-white/80 mb-6">
-                My journey in crypto began in 2016 when I first discovered Bitcoin and became fascinated by its potential to transform the global financial system. What started as a personal interest quickly evolved into a full-time passion as I immersed myself in blockchain technology, tokenomics, and crypto markets.
+                بدأت رحلتي في عالم العملات الرقمية في عام 2016 عندما اكتشفت البيتكوين لأول مرة وأصبحت مفتوناً بإمكاناته لتحويل النظام المالي العالمي. ما بدأ كاهتمام شخصي تطور بسرعة إلى شغف بدوام كامل حيث غمرت نفسي في تقنية البلوكتشين، واقتصاديات الرموز، وأسواق العملات المشفرة.
               </p>
               <p className="text-white/80 mb-6">
-                After experiencing the highs and lows of multiple market cycles, I've developed a deep understanding of this volatile industry and the strategies needed to navigate it successfully. I've been fortunate to work with leading projects, advise numerous startups, and help hundreds of individuals build their crypto portfolios.
+                بعد تجربة ارتفاعات وانخفاضات دورات سوق متعددة، طورت فهماً عميقاً لهذه الصناعة المتقلبة والاستراتيجيات اللازمة للتنقل فيها بنجاح. كان من حسن حظي أن أعمل مع مشاريع رائدة، وتقديم المشورة للعديد من الشركات الناشئة، ومساعدة المئات من الأفراد في بناء محافظ العملات المشفرة الخاصة بهم.
               </p>
               <p className="text-white/80 mb-6">
-                Today, I focus on sharing my knowledge through personalized coaching, comprehensive courses, and strategic consulting. My mission is to empower others with the tools, knowledge, and confidence they need to succeed in the ever-evolving world of cryptocurrency.
+                اليوم، أركز على مشاركة معرفتي من خلال التدريب الشخصي، والدورات الشاملة، والاستشارات الاستراتيجية. مهمتي هي تمكين الآخرين بالأدوات والمعرفة والثقة التي يحتاجونها للنجاح في عالم العملات المشفرة المتطور باستمرار.
               </p>
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 rtl:space-x-reverse">
                 <div className="flex items-center gap-3">
                   <Calendar className="h-5 w-5 text-crypto" />
-                  <span className="text-white">7+ Years Experience</span>
+                  <span className="text-white">خبرة أكثر من 7 سنوات</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Zap className="h-5 w-5 text-crypto" />
-                  <span className="text-white">300+ Clients Helped</span>
+                  <span className="text-white">ساعدت أكثر من 300 عميل</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Award className="h-5 w-5 text-crypto" />
-                  <span className="text-white">Binance Certified</span>
+                  <span className="text-white">معتمد من بينانس</span>
                 </div>
               </div>
             </div>
@@ -87,51 +87,51 @@ const About = () => {
         <section className="py-16 bg-crypto-super-dark">
           <div className="container mx-auto px-4">
             <SectionHeading 
-              title="My Expertise" 
-              subtitle="Areas where I can help you succeed"
+              title="مجالات خبرتي" 
+              subtitle="المجالات التي يمكنني مساعدتك فيها للنجاح"
               centered
             />
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">DeFi & Yield Strategies</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">DeFi واستراتيجيات العائد</h3>
                 <p className="text-white/80">
-                  Expert in decentralized finance protocols, yield farming, liquidity provision, and risk management in the DeFi ecosystem.
+                  خبير في بروتوكولات التمويل اللامركزي، وزراعة العائد، وتوفير السيولة، وإدارة المخاطر في نظام DeFi البيئي.
                 </p>
               </div>
               
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">On-Chain Analysis</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">التحليل على السلسلة</h3>
                 <p className="text-white/80">
-                  Skilled at reading blockchain data to identify trends, whale movements, and market opportunities before they become mainstream.
+                  ماهر في قراءة بيانات البلوكتشين لتحديد الاتجاهات، وتحركات الحيتان، وفرص السوق قبل أن تصبح سائدة.
                 </p>
               </div>
               
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">NFT Markets</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">أسواق NFT</h3>
                 <p className="text-white/80">
-                  Knowledgeable about non-fungible token ecosystems, valuation methods, and emerging trends in digital collectibles.
+                  على دراية بالأنظمة البيئية للرموز غير القابلة للاستبدال، وطرق التقييم، والاتجاهات الناشئة في المقتنيات الرقمية.
                 </p>
               </div>
               
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">Tokenomics</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">اقتصاديات الرموز</h3>
                 <p className="text-white/80">
-                  Experienced in designing and analyzing token economic models for sustainability, growth, and value accrual.
+                  خبرة في تصميم وتحليل نماذج الاقتصاد الرمزي للاستدامة والنمو وتراكم القيمة.
                 </p>
               </div>
               
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">Crypto Security</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">أمان العملات المشفرة</h3>
                 <p className="text-white/80">
-                  Focused on personal and institutional security best practices to protect digital assets from threats.
+                  التركيز على أفضل ممارسات الأمان الشخصي والمؤسسي لحماية الأصول الرقمية من التهديدات.
                 </p>
               </div>
               
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">Market Psychology</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">علم نفس السوق</h3>
                 <p className="text-white/80">
-                  Understanding of market cycles, sentiment analysis, and psychological factors affecting crypto markets.
+                  فهم دورات السوق، وتحليل المشاعر، والعوامل النفسية التي تؤثر على أسواق العملات المشفرة.
                 </p>
               </div>
             </div>
@@ -142,8 +142,8 @@ const About = () => {
         <section className="py-16 bg-crypto-dark">
           <div className="container mx-auto px-4">
             <SectionHeading 
-              title="Partnerships & Collaborations" 
-              subtitle="Organizations I've worked with in the crypto space"
+              title="شراكات وتعاونات" 
+              subtitle="المنظمات التي عملت معها في مجال العملات المشفرة"
               centered
             />
             
@@ -187,17 +187,17 @@ const About = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 crypto-text-gradient">
-                Ready to Start Your Crypto Journey?
+                هل أنت مستعد لبدء رحلتك في عالم العملات المشفرة؟
               </h2>
               <p className="text-white/80 text-lg mb-8">
-                Let's work together to help you achieve your goals in the crypto space, whether you're just starting out or looking to optimize your existing strategy.
+                دعنا نعمل معًا لمساعدتك على تحقيق أهدافك في مجال العملات المشفرة، سواء كنت تبدأ للتو أو تتطلع إلى تحسين استراتيجيتك الحالية.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button className="crypto-gradient" asChild>
-                  <Link to="/services">Explore Services</Link>
+                  <Link to="/services">استعرض الخدمات</Link>
                 </Button>
                 <Button variant="outline" className="bg-transparent border-crypto/70 hover:border-crypto text-white hover:text-crypto" asChild>
-                  <Link to="/contact">Contact Me</Link>
+                  <Link to="/contact">تواصل معي</Link>
                 </Button>
               </div>
             </div>

@@ -20,13 +20,13 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
-          <Link to="/" className="text-white/80 hover:text-crypto transition-colors">الرئيسية</Link>
-          <Link to="/services" className="text-white/80 hover:text-crypto transition-colors">الخدمات</Link>
-          <Link to="/consulting" className="text-white/80 hover:text-crypto transition-colors">الاستشارات</Link>
-          <Link to="/about" className="text-white/80 hover:text-crypto transition-colors">من أنا</Link>
-          <Link to="/blog" className="text-white/80 hover:text-crypto transition-colors">المدونة</Link>
-          <Link to="/contact" className="text-white/80 hover:text-crypto transition-colors">تواصل معنا</Link>
+        <div className="hidden md:flex items-center gap-8">
+          <Link to="/" className="text-white/80 hover:text-crypto transition-colors px-2">الرئيسية</Link>
+          <Link to="/services" className="text-white/80 hover:text-crypto transition-colors px-2">الخدمات</Link>
+          <Link to="/consulting" className="text-white/80 hover:text-crypto transition-colors px-2">الاستشارات</Link>
+          <Link to="/about" className="text-white/80 hover:text-crypto transition-colors px-2">من أنا</Link>
+          <Link to="/blog" className="text-white/80 hover:text-crypto transition-colors px-2">المدونة</Link>
+          <Link to="/contact" className="text-white/80 hover:text-crypto transition-colors px-2">تواصل معنا</Link>
           <Button className="crypto-gradient">احجز جلسة</Button>
         </div>
 

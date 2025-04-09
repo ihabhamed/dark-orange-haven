@@ -11,21 +11,20 @@ const Hero = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Your Guide to Navigating the
-            <span className="crypto-text-gradient"> Crypto Universe</span>
+            <span className="crypto-text-gradient">دليلك لاكتشاف عالم العملات الرقمية</span>
           </h1>
           <p className="text-xl text-white/80 mb-8 leading-relaxed">
-            Expert coaching, personalized consulting, and comprehensive courses to help you achieve success in your crypto journey.
+            تدريب متخصص، استشارات مخصصة، ودورات تعليمية شاملة لمساعدتك على النجاح في رحلتك مع العملات الرقمية.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button className="crypto-gradient text-lg p-6 group" asChild>
               <Link to="/services">
-                <span className="mr-2">Explore Services</span>
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <span className="ml-2">استعرض الخدمات</span>
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 rtl-flip" />
               </Link>
             </Button>
             <Button variant="outline" className="text-lg p-6 bg-transparent border-crypto/70 hover:border-crypto text-white hover:text-crypto" asChild>
-              <Link to="/contact">Contact Me</Link>
+              <Link to="/contact">تواصل معي</Link>
             </Button>
           </div>
           
@@ -34,9 +33,9 @@ const Hero = () => {
               <div className="bg-crypto/10 p-3 rounded-lg">
                 <BookOpen className="h-6 w-6 text-crypto" />
               </div>
-              <div className="text-left">
-                <h3 className="font-medium text-white">Expert Courses</h3>
-                <p className="text-white/70 text-sm">Comprehensive crypto education</p>
+              <div className="text-right">
+                <h3 className="font-medium text-white">دورات متخصصة</h3>
+                <p className="text-white/70 text-sm">تعليم شامل للعملات الرقمية</p>
               </div>
             </div>
             
@@ -44,9 +43,9 @@ const Hero = () => {
               <div className="bg-crypto/10 p-3 rounded-lg">
                 <Users className="h-6 w-6 text-crypto" />
               </div>
-              <div className="text-left">
-                <h3 className="font-medium text-white">1:1 Coaching</h3>
-                <p className="text-white/70 text-sm">Personalized guidance for your goals</p>
+              <div className="text-right">
+                <h3 className="font-medium text-white">تدريب شخصي</h3>
+                <p className="text-white/70 text-sm">توجيه مخصص لتحقيق أهدافك</p>
               </div>
             </div>
             
@@ -54,9 +53,9 @@ const Hero = () => {
               <div className="bg-crypto/10 p-3 rounded-lg">
                 <Zap className="h-6 w-6 text-crypto" />
               </div>
-              <div className="text-left">
-                <h3 className="font-medium text-white">Strategic Consulting</h3>
-                <p className="text-white/70 text-sm">Solutions for projects & businesses</p>
+              <div className="text-right">
+                <h3 className="font-medium text-white">استشارات استراتيجية</h3>
+                <p className="text-white/70 text-sm">حلول للمشاريع والأعمال</p>
               </div>
             </div>
           </div>
