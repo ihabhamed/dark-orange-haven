@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { useAdminCheck } from './useAdminCheck';
@@ -15,38 +14,47 @@ export const useAuthStateChange = () => {
   
   const { checkUserRole } = useAdminCheck();
 
-  // Memoized function to handle auth state change
+  // ✅ Function runs on auth state change (e.g. sign in)
   const handleAuthChange = useCallback(async (currentSession: Session | null) => {
-    console.log('Auth state change handler called with session:', currentSession ? 'exists' : 'null');
+    console.log('⚡ handleAuthChange triggered with session:', currentSession ? 'exists' : 'null');
     setSession(currentSession);
     
     if (currentSession?.user) {
       setUser(currentSession.user);
-      
+
+      console.log("⚡ About to run checkUserRole...");
+
       try {
-        // Check if user is admin after setting the user
+        // ✅ Checking admin role using user_id
         const isUserAdmin = await checkUserRole(currentSession.user.id);
         console.log('🔍 Admin Check → User ID:', currentSession.user.id);
         console.log('🧠 Admin Check → Returned:', isUserAdmin);
 
         setIsAdmin(isUserAdmin);
       } catch (error) {
-        console.error('Error checking admin status:', error);
+        console.error('❌ Error checking admin status:', error);
         setIsAdmin(false);
       }
     } else {
+      console.log("❌ No session or user found – clearing state");
       setUser(null);
       setIsAdmin(false);
     }
-    
-    // Mark auth check as complete and loading as finished
+
+    // ✅ Mark auth check complete
     setAuthChecked(true);
     setIsLoading(false);
   }, [checkUserRole]);
 
-  // Debug useEffect to log state changes
+  // 🐞 Debug logs to follow auth state changes
   useEffect(() => {
-    console.log({ isLoading, user, isAdmin, authChecked, session: !!session });
+    console.log("🧾 Auth context state:", {
+      isLoading,
+      user: !!user,
+      isAdmin,
+      authChecked,
+      session: !!session,
+    });
   }, [isLoading, user, isAdmin, authChecked, session]);
 
   return {
