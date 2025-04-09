@@ -2,23 +2,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
-import { toast } from '@/hooks/use-toast';
-
-interface AuthResult {
-  error?: {
-    message: string;
-  } | null;
-}
-
-interface AuthContextType {
-  user: User | null;
-  session: Session | null;
-  isAdmin: boolean;
-  isLoading: boolean;
-  signIn: (email: string, password: string) => Promise<AuthResult>;
-  signUp: (email: string, password: string) => Promise<AuthResult>;
-  signOut: () => Promise<void>;
-}
+import { AuthContextType } from '@/types/auth';
+import { useAdminCheck } from '@/hooks/useAdminCheck';
+import { useAuthActions } from '@/hooks/useAuthActions';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -27,28 +13,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Function to check if user is admin
-  const checkUserRole = async (userId: string) => {
-    try {
-      const { data: userRoles, error: rolesError } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', userId)
-        .eq('role', 'admin')
-        .single();
-      
-      if (rolesError && rolesError.code !== 'PGRST116') {
-        console.error('Error fetching user role:', rolesError);
-        return false;
-      }
-      
-      return !!userRoles;
-    } catch (error) {
-      console.error('Error in checkUserRole:', error);
-      return false;
-    }
-  };
+  
+  const { checkUserRole } = useAdminCheck();
+  const { signIn, signUp, signOut } = useAuthActions(setIsLoading);
 
   // Function to handle auth state change
   const handleAuthChange = async (currentSession: Session | null) => {
@@ -91,105 +58,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       authListener.subscription.unsubscribe();
     };
   }, []);
-
-  const signIn = async (email: string, password: string): Promise<AuthResult> => {
-    try {
-      console.log('Signing in user:', email);
-      setIsLoading(true);
-      
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-      
-      if (error) {
-        console.error('Sign in error:', error);
-        toast({
-          title: 'خطأ في تسجيل الدخول',
-          description: error.message,
-          variant: 'destructive',
-        });
-        setIsLoading(false);
-        return { error };
-      }
-      
-      // Session will be handled by the onAuthStateChange listener
-      console.log('Sign in successful');
-      toast({
-        title: 'تم تسجيل الدخول بنجاح',
-        description: 'مرحبًا بك في لوحة التحكم',
-      });
-      
-      return { error: null };
-    } catch (error: any) {
-      console.error('Error signing in:', error);
-      setIsLoading(false);
-      return { error: { message: error.message || 'حدث خطأ غير متوقع' } };
-    }
-  };
-
-  const signUp = async (email: string, password: string): Promise<AuthResult> => {
-    try {
-      console.log('Signing up user:', email);
-      setIsLoading(true);
-      
-      const { data, error } = await supabase.auth.signUp({ email, password });
-      
-      if (error) {
-        console.error('Sign up error:', error);
-        toast({
-          title: 'خطأ في إنشاء الحساب',
-          description: error.message,
-          variant: 'destructive',
-        });
-        setIsLoading(false);
-        return { error };
-      }
-      
-      // Session will be handled by the onAuthStateChange listener if email confirmation is disabled
-      console.log('Sign up successful');
-      toast({
-        title: 'تم إنشاء الحساب بنجاح',
-        description: 'تم إرسال رابط التأكيد إلى بريدك الإلكتروني',
-      });
-      
-      setIsLoading(false);
-      return { error: null };
-    } catch (error: any) {
-      console.error('Error signing up:', error);
-      setIsLoading(false);
-      return { error: { message: error.message || 'حدث خطأ غير متوقع' } };
-    }
-  };
-
-  const signOut = async () => {
-    try {
-      console.log('Signing out user');
-      setIsLoading(true);
-      
-      const { error } = await supabase.auth.signOut();
-      
-      if (error) {
-        console.error('Sign out error:', error);
-        toast({
-          title: 'خطأ في تسجيل الخروج',
-          description: error.message,
-          variant: 'destructive',
-        });
-        setIsLoading(false);
-        throw error;
-      }
-      
-      // Session will be handled by the onAuthStateChange listener
-      console.log('Sign out successful');
-      toast({
-        title: 'تم تسجيل الخروج بنجاح',
-      });
-      
-      return;
-    } catch (error) {
-      console.error('Error signing out:', error);
-      setIsLoading(false);
-      throw error;
-    }
-  };
 
   return (
     <AuthContext.Provider value={{ user, session, isAdmin, isLoading, signIn, signUp, signOut }}>
