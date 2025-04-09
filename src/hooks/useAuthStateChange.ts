@@ -12,7 +12,12 @@ export const useAuthStateChange = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [authChecked, setAuthChecked] = useState(false);
   
-  const { checkUserRole } = useAdminCheck();
+  const adminCheckResult = useAdminCheck(); // ✅ استدعاء hook
+  const { checkUserRole } = adminCheckResult;
+
+  // ✅ اختبار الدالة راجعة ولا لا
+  console.log("🔄 useAdminCheck() returned:", adminCheckResult);
+  console.log("🔧 checkUserRole function is:", checkUserRole);
 
   // ✅ Function runs on auth state change (e.g. sign in)
   const handleAuthChange = useCallback(async (currentSession: Session | null) => {
