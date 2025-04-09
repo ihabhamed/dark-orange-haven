@@ -27,7 +27,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   priceNote
 }) => {
   return (
-    <Card className={`overflow-hidden transition-all duration-300 hover:border-crypto/50 ${
+    <Card className={`overflow-hidden transition-all duration-300 hover:border-crypto/50 h-full flex flex-col ${
       featured ? 'glass-card border-crypto/30' : 'bg-crypto-dark/50 border-white/5'
     }`}>
       <CardHeader className="pb-3 text-right relative">
@@ -43,7 +43,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           </CardDescription>
         )}
       </CardHeader>
-      <CardContent className="text-right">
+      <CardContent className="text-right flex-grow">
         <p className="text-white/80 mb-4">{description}</p>
         
         <div className="mt-4 text-center py-3 border-t border-b border-white/10">
@@ -56,7 +56,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           )}
         </div>
       </CardContent>
-      <CardFooter className="pt-3 justify-end">
+      <CardFooter className="pt-3 justify-end mt-auto">
         <Button className="w-full crypto-gradient group">
           <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
           <span className="mr-2">اطلب الآن</span>

@@ -18,7 +18,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
         <span className="crypto-text-gradient">{title}</span>
       </h2>
       {subtitle && (
-        <p className="text-white/70 text-lg max-w-3xl mr-auto">
+        <p className={`text-white/70 text-lg ${centered ? 'mx-auto max-w-3xl' : 'mr-auto max-w-3xl'}`}>
           {subtitle}
         </p>
       )}
