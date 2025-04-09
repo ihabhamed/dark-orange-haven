@@ -13,6 +13,8 @@ export interface Service {
   discount_badge?: string;
   featured: boolean;
   display_order?: number;
+  icon?: string;
+  features?: any;
   slug: string;
   created_at: string;
   updated_at: string;
@@ -49,6 +51,7 @@ export interface GlobalSetting {
   id: string;
   key: string;
   value: any;
+  created_at: string;
   updated_at: string;
 }
 

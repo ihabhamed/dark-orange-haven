@@ -22,9 +22,11 @@ export interface Database {
           discount_badge: string | null
           featured: boolean
           display_order: number | null
+          icon: string | null
           slug: string
           created_at: string
           updated_at: string
+          features: Json | null
         }
         Insert: {
           id?: string
@@ -37,9 +39,11 @@ export interface Database {
           discount_badge?: string | null
           featured?: boolean
           display_order?: number | null
+          icon?: string | null
           slug?: string
           created_at?: string
           updated_at?: string
+          features?: Json | null
         }
         Update: {
           id?: string
@@ -52,9 +56,11 @@ export interface Database {
           discount_badge?: string | null
           featured?: boolean
           display_order?: number | null
+          icon?: string | null
           slug?: string
           created_at?: string
           updated_at?: string
+          features?: Json | null
         }
       }
       blog_posts: {
@@ -141,18 +147,21 @@ export interface Database {
           id: string
           key: string
           value: Json
+          created_at: string
           updated_at: string
         }
         Insert: {
           id?: string
           key: string
           value: Json
+          created_at?: string
           updated_at?: string
         }
         Update: {
           id?: string
           key?: string
           value?: Json
+          created_at?: string
           updated_at?: string
         }
       }
@@ -210,10 +219,8 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      has_role: {
-        Args: {
-          role: "admin" | "user"
-        }
+      is_admin: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
     }

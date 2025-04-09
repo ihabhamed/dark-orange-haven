@@ -7,21 +7,45 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { signIn, signUp } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     
     try {
       setIsLoading(true);
-      await signIn(email, password);
+      const result = await signIn(email, password);
+      
+      if (result.error) {
+        console.error('Login error:', result.error);
+        toast({
+          title: 'خطأ في تسجيل الدخول',
+          description: result.error.message || 'فشل تسجيل الدخول، يرجى التحقق من بيانات الاعتماد والمحاولة مرة أخرى.',
+          variant: 'destructive',
+        });
+      } else {
+        toast({
+          title: 'تم تسجيل الدخول بنجاح',
+          description: 'مرحباً بك في لوحة التحكم',
+        });
+        navigate('/admin');
+      }
     } catch (error) {
       console.error('Login error:', error);
+      toast({
+        title: 'خطأ في تسجيل الدخول',
+        description: 'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.',
+        variant: 'destructive',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -30,11 +54,48 @@ const LoginForm: React.FC = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!email || !password) {
+      toast({
+        title: 'بيانات ناقصة',
+        description: 'يرجى إدخال البريد الإلكتروني وكلمة المرور.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    
+    if (password.length < 6) {
+      toast({
+        title: 'كلمة المرور قصيرة',
+        description: 'يجب أن تكون كلمة المرور 6 أحرف على الأقل.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    
     try {
       setIsLoading(true);
-      await signUp(email, password);
+      const result = await signUp(email, password);
+      
+      if (result.error) {
+        console.error('Signup error:', result.error);
+        toast({
+          title: 'خطأ في إنشاء الحساب',
+          description: result.error.message || 'فشل إنشاء الحساب، يرجى المحاولة مرة أخرى.',
+          variant: 'destructive',
+        });
+      } else {
+        toast({
+          title: 'تم إنشاء الحساب بنجاح',
+          description: 'تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.',
+        });
+      }
     } catch (error) {
       console.error('Signup error:', error);
+      toast({
+        title: 'خطأ في إنشاء الحساب',
+        description: 'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.',
+        variant: 'destructive',
+      });
     } finally {
       setIsLoading(false);
     }
