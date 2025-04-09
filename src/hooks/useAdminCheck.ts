@@ -14,6 +14,11 @@ export const useAdminCheck = () => {
         .eq('user_id', userId)
         .eq('role', 'admin')
         .single();
+// console code GPT test
+      console.log("🔍 checkUserRole => userId:", userId);
+      console.log("📦 Role fetched:", userRoles);
+      console.log("❌ Role fetch error:", rolesError);
+
       
       if (rolesError && rolesError.code !== 'PGRST116') {
         console.error('Error fetching user role:', rolesError);
