@@ -1,5 +1,3 @@
-
-import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
 /**
@@ -8,31 +6,25 @@ import { supabase } from '@/lib/supabase';
 export const useAdminCheck = () => {
   const checkUserRole = async (userId: string): Promise<boolean> => {
     try {
+      console.log("🟡 Running checkUserRole for user:", userId);
+
       const { data: userRoles, error: rolesError } = await supabase
-  .from('user_roles')
-  .select('role')
-  .eq('user_id', userId)
-  .maybeSingle();
-      
-// console code GPT test
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .maybeSingle(); // منع كسر الدالة لو مفيش نتيجة
 
-console.log("🔍 checkUserRole => userId:", userId);
-console.log("📦 Role fetched:", userRoles);
-console.log("❌ Role fetch error:", rolesError);
+      console.log("📦 Role fetched:", userRoles);
+      console.log("❌ Role fetch error:", rolesError);
 
-return userRoles?.role === 'admin';
-
-  
-
-      
       if (rolesError && rolesError.code !== 'PGRST116') {
-        console.error('Error fetching user role:', rolesError);
+        console.error('🔴 Error fetching user role:', rolesError);
         return false;
       }
-      
-      return !!userRoles;
+
+      return userRoles?.role === 'admin';
     } catch (error) {
-      console.error('Error in checkUserRole:', error);
+      console.error("🔥 checkUserRole failed with error:", error);
       return false;
     }
   };
