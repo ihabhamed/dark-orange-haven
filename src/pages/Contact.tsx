@@ -18,10 +18,10 @@ const Contact = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="crypto-text-gradient">Get in Touch</span>
+                <span className="crypto-text-gradient">تواصل معنا</span>
               </h1>
               <p className="text-xl text-white/80 mb-8">
-                Have questions? Looking for consulting or coaching services? I'm here to help!
+                هل لديك أسئلة؟ تبحث عن خدمات استشارية أو تدريبية؟ أنا هنا للمساعدة!
               </p>
             </div>
           </div>
@@ -33,8 +33,8 @@ const Contact = () => {
             <div className="flex flex-col lg:flex-row gap-12">
               <div className="w-full lg:w-1/3">
                 <SectionHeading 
-                  title="Contact Information" 
-                  subtitle="Feel free to reach out through any of these channels"
+                  title="معلومات التواصل" 
+                  subtitle="لا تتردد في التواصل من خلال أي من هذه القنوات"
                 />
                 
                 <div className="space-y-6 mt-8">
@@ -43,9 +43,9 @@ const Contact = () => {
                       <Mail className="h-6 w-6 text-crypto" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-white mb-1">Email</h3>
+                      <h3 className="font-medium text-white mb-1">البريد الإلكتروني</h3>
                       <p className="text-white/70">contact@example.com</p>
-                      <p className="text-white/50 text-sm mt-1">For general inquiries and business opportunities</p>
+                      <p className="text-white/50 text-sm mt-1">للاستفسارات العامة وفرص الأعمال</p>
                     </div>
                   </div>
                   
@@ -54,9 +54,9 @@ const Contact = () => {
                       <Send className="h-6 w-6 text-crypto" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-white mb-1">Telegram</h3>
+                      <h3 className="font-medium text-white mb-1">تيليجرام</h3>
                       <p className="text-white/70">@cryptoexpert</p>
-                      <p className="text-white/50 text-sm mt-1">For quick questions and direct messaging</p>
+                      <p className="text-white/50 text-sm mt-1">للأسئلة السريعة والمراسلة المباشرة</p>
                     </div>
                   </div>
                   
@@ -65,25 +65,25 @@ const Contact = () => {
                       <MessageSquare className="h-6 w-6 text-crypto" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-white mb-1">Social Media</h3>
-                      <p className="text-white/70">Twitter: @cryptoexpert</p>
-                      <p className="text-white/50 text-sm mt-1">For updates, insights, and public discussions</p>
+                      <h3 className="font-medium text-white mb-1">وسائل التواصل الاجتماعي</h3>
+                      <p className="text-white/70">تويتر: @cryptoexpert</p>
+                      <p className="text-white/50 text-sm mt-1">للتحديثات والرؤى والمناقشات العامة</p>
                     </div>
                   </div>
                 </div>
                 
                 <div className="mt-10 p-6 glass-card rounded-xl">
-                  <h3 className="text-xl font-semibold mb-4 text-white">Typical Response Time</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-white">وقت الاستجابة النموذجي</h3>
                   <p className="text-white/80">
-                    I typically respond to all inquiries within 24-48 hours during business days. For urgent matters, please indicate in the subject line.
+                    عادة ما أرد على جميع الاستفسارات في غضون 24-48 ساعة خلال أيام العمل. للأمور العاجلة، يرجى الإشارة إلى ذلك في سطر الموضوع.
                   </p>
                 </div>
               </div>
               
               <div className="w-full lg:w-2/3">
                 <SectionHeading 
-                  title="Send Me a Message" 
-                  subtitle="Use the form below to send a direct message"
+                  title="أرسل لي رسالة" 
+                  subtitle="استخدم النموذج أدناه لإرسال رسالة مباشرة"
                 />
                 
                 <div className="glass-card p-6 md:p-8 rounded-xl">
@@ -98,37 +98,37 @@ const Contact = () => {
         <section className="py-16 bg-crypto-super-dark">
           <div className="container mx-auto px-4">
             <SectionHeading 
-              title="Frequently Asked Questions" 
-              subtitle="Common questions about contacting and working with me"
+              title="الأسئلة الشائعة" 
+              subtitle="أسئلة شائعة حول التواصل والعمل معي"
               centered
             />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">How do I book a coaching session?</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">كيف أحجز جلسة تدريبية؟</h3>
                 <p className="text-white/80">
-                  You can book a coaching session by filling out the contact form or sending an email with your preferred dates and times. I'll respond with confirmation and payment details.
+                  يمكنك حجز جلسة تدريبية عن طريق ملء نموذج الاتصال أو إرسال بريد إلكتروني بالتواريخ والأوقات المفضلة لديك. سأرد بتأكيد وتفاصيل الدفع.
                 </p>
               </div>
               
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">Do you offer refunds?</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">هل تقدم استرداد الأموال؟</h3>
                 <p className="text-white/80">
-                  For courses, I offer a 7-day money-back guarantee if you're not satisfied. Coaching sessions can be rescheduled with 48 hours notice but are non-refundable.
+                  بالنسبة للدورات، أقدم ضمان استرداد الأموال لمدة 7 أيام إذا لم تكن راضيًا. يمكن إعادة جدولة جلسات التدريب بإشعار قبل 48 ساعة ولكنها غير قابلة للاسترداد.
                 </p>
               </div>
               
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">How do consulting projects work?</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">كيف تعمل مشاريع الاستشارات؟</h3>
                 <p className="text-white/80">
-                  Consulting projects begin with a free discovery call to understand your needs. I then prepare a custom proposal with scope, timeline, and pricing for your approval.
+                  تبدأ مشاريع الاستشارات بمكالمة استكشافية مجانية لفهم احتياجاتك. ثم أقوم بإعداد اقتراح مخصص مع النطاق والجدول الزمني والتسعير للحصول على موافقتك.
                 </p>
               </div>
               
               <div className="glass-card p-6 rounded-xl">
-                <h3 className="text-xl font-semibold mb-4 text-white">Can I get custom services?</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">هل يمكنني الحصول على خدمات مخصصة؟</h3>
                 <p className="text-white/80">
-                  Yes, I offer custom services tailored to your specific needs. Contact me with details about what you're looking for, and we can discuss a personalized solution.
+                  نعم، أقدم خدمات مخصصة مصممة لتلبية احتياجاتك المحددة. اتصل بي مع تفاصيل حول ما تبحث عنه، ويمكننا مناقشة حل مخصص.
                 </p>
               </div>
             </div>

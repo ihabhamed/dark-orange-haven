@@ -33,7 +33,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       </CardHeader>
       <CardContent className="text-right">
         <p className="text-white/80">{description}</p>
-        <div className="mt-4 font-bold text-xl text-crypto">{price}</div>
+        <div className="mt-4 font-bold text-xl text-crypto">رسوم الخدمة: {price}</div>
       </CardContent>
       <CardFooter className="pt-3 justify-end">
         <Button className="w-full crypto-gradient group">

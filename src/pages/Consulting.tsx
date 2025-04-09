@@ -20,10 +20,10 @@ const Consulting = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="crypto-text-gradient">Strategic Consulting</span> For Crypto Success
+                <span className="crypto-text-gradient">استشارات استراتيجية</span> للنجاح في الكريبتو
               </h1>
               <p className="text-xl text-white/80 mb-8">
-                Expert guidance for businesses, projects, and high-net-worth individuals in the cryptocurrency and blockchain space.
+                إرشاد خبير للشركات والمشاريع والأفراد ذوي الملاءة المالية العالية في مجال العملات المشفرة والبلوكتشين.
               </p>
             </div>
           </div>
@@ -35,19 +35,19 @@ const Consulting = () => {
             <div className="flex flex-col md:flex-row gap-12 items-center">
               <div className="w-full md:w-1/2">
                 <SectionHeading 
-                  title="Tailored Consulting Services" 
-                  subtitle="Comprehensive solutions for your specific crypto challenges"
+                  title="خدمات استشارية مخصصة" 
+                  subtitle="حلول شاملة لتحديات الكريبتو الخاصة بك"
                 />
                 <p className="text-white/80 mb-6">
-                  With extensive experience in the crypto industry, I provide strategic consulting services to help businesses and individuals navigate the complex digital asset landscape. My consulting approach is highly personalized, focusing on your unique goals and challenges.
+                  مع خبرة واسعة في صناعة العملات المشفرة، أقدم خدمات استشارية استراتيجية لمساعدة الشركات والأفراد على التنقل في مشهد الأصول الرقمية المعقد. نهجي الاستشاري مخصص للغاية، مع التركيز على أهدافك وتحدياتك الفريدة.
                 </p>
                 <p className="text-white/80 mb-6">
-                  Whether you're launching a new project, integrating blockchain technology into your business, or seeking to optimize your crypto portfolio, I offer the expertise and insights to help you succeed.
+                  سواء كنت تطلق مشروعًا جديدًا، أو تدمج تقنية البلوكتشين في عملك، أو تسعى لتحسين محفظة الكريبتو الخاصة بك، أقدم الخبرة والرؤى لمساعدتك على النجاح.
                 </p>
                 <Button className="crypto-gradient group" asChild>
                   <Link to="/contact">
-                    <span className="mr-2">Request a Consultation</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <span className="ml-2">اطلب استشارة</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl-flip" />
                   </Link>
                 </Button>
               </div>
@@ -66,8 +66,8 @@ const Consulting = () => {
         <section className="py-16 bg-crypto-super-dark">
           <div className="container mx-auto px-4">
             <SectionHeading 
-              title="Consulting Use Cases" 
-              subtitle="Real-world applications of my crypto consulting services"
+              title="حالات استشارية" 
+              subtitle="تطبيقات واقعية لخدمات استشارات الكريبتو الخاصة بي"
               centered
             />
             
@@ -77,11 +77,11 @@ const Consulting = () => {
                   <div className="bg-crypto/10 p-3 rounded-lg w-fit mb-4">
                     <Rocket className="h-6 w-6 text-crypto" />
                   </div>
-                  <CardTitle className="text-white">Project Launches</CardTitle>
+                  <CardTitle className="text-white">إطلاق المشاريع</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-white/80">
-                    Strategic guidance for crypto startups, including tokenomics design, go-to-market strategy, community building, and exchange listings.
+                    توجيه استراتيجي للشركات الناشئة في مجال الكريبتو، بما في ذلك تصميم التوكنوميكس، واستراتيجية الدخول إلى السوق، وبناء المجتمع، والإدراج في البورصات.
                   </p>
                 </CardContent>
               </Card>
@@ -91,11 +91,11 @@ const Consulting = () => {
                   <div className="bg-crypto/10 p-3 rounded-lg w-fit mb-4">
                     <BarChart3 className="h-6 w-6 text-crypto" />
                   </div>
-                  <CardTitle className="text-white">Portfolio Management</CardTitle>
+                  <CardTitle className="text-white">إدارة المحافظ</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-white/80">
-                    Sophisticated portfolio strategies for high-net-worth individuals, including risk assessment, diversification plans, and yield optimization.
+                    استراتيجيات محفظة متطورة للأفراد ذوي الملاءة المالية العالية، بما في ذلك تقييم المخاطر، وخطط التنويع، وتحسين العائد.
                   </p>
                 </CardContent>
               </Card>
@@ -105,11 +105,11 @@ const Consulting = () => {
                   <div className="bg-crypto/10 p-3 rounded-lg w-fit mb-4">
                     <Briefcase className="h-6 w-6 text-crypto" />
                   </div>
-                  <CardTitle className="text-white">Business Integration</CardTitle>
+                  <CardTitle className="text-white">تكامل الأعمال</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-white/80">
-                    Helping businesses integrate blockchain technology, cryptocurrency payments, and web3 functionalities into their existing operations.
+                    مساعدة الشركات على دمج تقنية البلوكتشين، ومدفوعات العملات المشفرة، ووظائف الويب3 في عملياتها الحالية.
                   </p>
                 </CardContent>
               </Card>
@@ -119,11 +119,11 @@ const Consulting = () => {
                   <div className="bg-crypto/10 p-3 rounded-lg w-fit mb-4">
                     <Users className="h-6 w-6 text-crypto" />
                   </div>
-                  <CardTitle className="text-white">Community Building</CardTitle>
+                  <CardTitle className="text-white">بناء المجتمع</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-white/80">
-                    Strategies to build and engage crypto communities, including Twitter growth, Discord management, and community incentive structures.
+                    استراتيجيات لبناء وإشراك مجتمعات الكريبتو، بما في ذلك النمو على تويتر، وإدارة ديسكورد، وهياكل حوافز المجتمع.
                   </p>
                 </CardContent>
               </Card>
@@ -133,11 +133,11 @@ const Consulting = () => {
                   <div className="bg-crypto/10 p-3 rounded-lg w-fit mb-4">
                     <LineChart className="h-6 w-6 text-crypto" />
                   </div>
-                  <CardTitle className="text-white">Market Analysis</CardTitle>
+                  <CardTitle className="text-white">تحليل السوق</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-white/80">
-                    In-depth market analysis, trend identification, and competitive research to inform strategic business and investment decisions.
+                    تحليل متعمق للسوق، وتحديد الاتجاهات، والبحث التنافسي لإبلاغ قرارات الأعمال والاستثمار الاستراتيجية.
                   </p>
                 </CardContent>
               </Card>
@@ -147,11 +147,11 @@ const Consulting = () => {
                   <div className="bg-crypto/10 p-3 rounded-lg w-fit mb-4">
                     <Cpu className="h-6 w-6 text-crypto" />
                   </div>
-                  <CardTitle className="text-white">Technical Solutions</CardTitle>
+                  <CardTitle className="text-white">الحلول التقنية</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-white/80">
-                    Technical advisement on smart contract development, security audits, blockchain selection, and protocol optimization.
+                    استشارات تقنية بشأن تطوير العقود الذكية، وعمليات التدقيق الأمني، واختيار البلوكتشين، وتحسين البروتوكول.
                   </p>
                 </CardContent>
               </Card>
@@ -166,13 +166,13 @@ const Consulting = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 crypto-text-gradient">
-                Let's Discuss Your Project
+                دعنا نناقش مشروعك
               </h2>
               <p className="text-white/80 text-lg mb-8">
-                Every consultation begins with understanding your unique needs and objectives. Contact me to schedule a discovery call and explore how we can work together.
+                كل استشارة تبدأ بفهم احتياجاتك وأهدافك الفريدة. اتصل بي لجدولة مكالمة استكشافية واستكشاف كيف يمكننا العمل معًا.
               </p>
               <Button className="crypto-gradient text-lg p-6" asChild>
-                <Link to="/contact">Request Consulting Services</Link>
+                <Link to="/contact">اطلب خدمات استشارية</Link>
               </Button>
             </div>
           </div>

@@ -11,56 +11,56 @@ import { ArrowRight, Calendar, User } from 'lucide-react';
 const blogPosts = [
   {
     id: 1,
-    title: "Understanding DeFi Yield Strategies in 2025",
-    excerpt: "A comprehensive guide to the latest yield farming strategies across different DeFi protocols and how to maximize returns while managing risk.",
-    date: "April 2, 2025",
-    author: "Crypto Expert",
+    title: "فهم استراتيجيات عائد DeFi في 2025",
+    excerpt: "دليل شامل لأحدث استراتيجيات استثمار العائد عبر بروتوكولات DeFi المختلفة وكيفية تعظيم العوائد مع إدارة المخاطر.",
+    date: "2 أبريل، 2025",
+    author: "خبير الكريبتو",
     category: "DeFi",
     image: "https://images.unsplash.com/photo-1639152201720-5e536d254d81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
   },
   {
     id: 2,
-    title: "The Ultimate Guide to Airdrop Hunting",
-    excerpt: "Learn how to identify promising projects, position yourself for airdrops, and maximize your chances of receiving valuable token distributions.",
-    date: "March 27, 2025",
-    author: "Crypto Expert",
-    category: "Airdrops",
+    title: "الدليل النهائي لصيد الإيردروبس",
+    excerpt: "تعلم كيفية تحديد المشاريع الواعدة، وضع نفسك في موقع يؤهلك للحصول على الإيردروبس، وتعظيم فرصك في الحصول على توزيعات العملات ذات القيمة.",
+    date: "27 مارس، 2025",
+    author: "خبير الكريبتو",
+    category: "الإيردروبس",
     image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1497&q=80"
   },
   {
     id: 3,
-    title: "On-Chain Analysis: Reading the Blockchain Tea Leaves",
-    excerpt: "How to use on-chain metrics to gain insights into market movements before they happen and make more informed investment decisions.",
-    date: "March 15, 2025",
-    author: "Crypto Expert",
-    category: "Analysis",
+    title: "التحليل على السلسلة: قراءة أوراق الشاي على البلوكتشين",
+    excerpt: "كيفية استخدام مقاييس السلسلة للحصول على رؤى في تحركات السوق قبل حدوثها واتخاذ قرارات استثمارية أكثر استنارة.",
+    date: "15 مارس، 2025",
+    author: "خبير الكريبتو",
+    category: "التحليل",
     image: "https://images.unsplash.com/photo-1639152201698-ae0e00a7b09e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80"
   },
   {
     id: 4,
-    title: "Layer 2 Scaling Solutions: Comparing the Top Contenders",
-    excerpt: "An in-depth comparison of leading Layer 2 solutions including Optimism, Arbitrum, zkSync, and more. Which ones are winning the scaling race?",
-    date: "March 3, 2025",
-    author: "Crypto Expert",
-    category: "Technology",
+    title: "حلول التوسع للطبقة الثانية: مقارنة المتنافسين الرئيسيين",
+    excerpt: "مقارنة متعمقة لحلول الطبقة الثانية الرائدة بما في ذلك Optimism وArbitrum وzkSync والمزيد. أيها يفوز في سباق التوسع؟",
+    date: "3 مارس، 2025",
+    author: "خبير الكريبتو",
+    category: "التكنولوجيا",
     image: "https://images.unsplash.com/photo-1622538479522-2114d453539d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80"
   },
   {
     id: 5,
-    title: "NFT Market Analysis: Beyond the JPEG",
-    excerpt: "Exploring the evolving landscape of NFTs beyond digital art, including real-world assets, gaming, and identity applications.",
-    date: "February 25, 2025",
-    author: "Crypto Expert",
+    title: "تحليل سوق NFT: ما وراء صور JPEG",
+    excerpt: "استكشاف المشهد المتطور للرموز غير القابلة للاستبدال (NFTs) بما يتجاوز الفن الرقمي، بما في ذلك الأصول الحقيقية والألعاب وتطبيقات الهوية.",
+    date: "25 فبراير، 2025",
+    author: "خبير الكريبتو",
     category: "NFTs",
     image: "https://images.unsplash.com/photo-1645956734458-63944ca12b61?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80"
   },
   {
     id: 6,
-    title: "The Beginner's Guide to Crypto Taxes",
-    excerpt: "Navigating the complex world of cryptocurrency taxation. What you need to know to stay compliant while optimizing your tax strategy.",
-    date: "February 14, 2025",
-    author: "Crypto Expert",
-    category: "Education",
+    title: "دليل المبتدئين لضرائب العملات المشفرة",
+    excerpt: "التنقل في عالم ضرائب العملات المشفرة المعقد. ما تحتاج إلى معرفته للبقاء ملتزمًا مع تحسين استراتيجيتك الضريبية.",
+    date: "14 فبراير، 2025",
+    author: "خبير الكريبتو",
+    category: "التعليم",
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80"
   }
 ];
@@ -77,10 +77,10 @@ const Blog = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="crypto-text-gradient">Crypto Insights</span> & Analysis
+                <span className="crypto-text-gradient">رؤى وتحليلات</span> الكريبتو
               </h1>
               <p className="text-xl text-white/80 mb-8">
-                Expert articles on cryptocurrency trends, strategies, and market analysis to keep you informed.
+                مقالات خبيرة عن اتجاهات العملات المشفرة واستراتيجياتها وتحليل السوق لإبقائك على اطلاع.
               </p>
             </div>
           </div>
@@ -90,8 +90,8 @@ const Blog = () => {
         <section className="py-16 bg-crypto-dark">
           <div className="container mx-auto px-4">
             <SectionHeading 
-              title="Latest Articles" 
-              subtitle="Stay updated with my latest insights on cryptocurrency, DeFi, NFTs, and more"
+              title="أحدث المقالات" 
+              subtitle="ابق على اطلاع بأحدث رؤاي حول العملات المشفرة، وDeFi، وNFTs، والمزيد"
             />
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -110,7 +110,7 @@ const Blog = () => {
                         {post.category}
                       </span>
                       <div className="flex items-center text-white/60 text-xs">
-                        <Calendar className="h-3 w-3 mr-1" />
+                        <Calendar className="h-3 w-3 ml-1" />
                         {post.date}
                       </div>
                     </div>
@@ -123,12 +123,12 @@ const Blog = () => {
                   </CardContent>
                   <CardFooter className="flex justify-between items-center pt-0">
                     <div className="flex items-center text-white/60 text-sm">
-                      <User className="h-3 w-3 mr-1" />
+                      <User className="h-3 w-3 ml-1" />
                       {post.author}
                     </div>
                     <Button variant="ghost" className="p-0 h-auto text-crypto hover:text-crypto-light hover:bg-transparent">
-                      <span className="mr-1">Read More</span>
-                      <ArrowRight className="h-4 w-4" />
+                      <span className="ml-1">إقرأ المزيد</span>
+                      <ArrowRight className="h-4 w-4 rtl-flip" />
                     </Button>
                   </CardFooter>
                 </Card>
@@ -137,7 +137,7 @@ const Blog = () => {
             
             <div className="mt-12 text-center">
               <Button className="crypto-gradient">
-                Load More Articles
+                تحميل المزيد من المقالات
               </Button>
             </div>
           </div>
@@ -149,20 +149,20 @@ const Blog = () => {
             <div className="glass-card p-8 md:p-12 rounded-2xl max-w-4xl mx-auto">
               <div className="text-center">
                 <h2 className="text-3xl font-bold mb-6 crypto-text-gradient">
-                  Subscribe to My Newsletter
+                  اشترك في نشرتي الإخبارية
                 </h2>
                 <p className="text-white/80 text-lg mb-8">
-                  Get the latest crypto insights, market analysis, and strategic advice delivered directly to your inbox.
+                  احصل على أحدث رؤى العملات المشفرة وتحليلات السوق والنصائح الاستراتيجية مباشرة إلى صندوق الوارد الخاص بك.
                 </p>
                 <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                   <input 
                     type="email" 
-                    placeholder="Your email address" 
+                    placeholder="عنوان بريدك الإلكتروني" 
                     className="flex-grow px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-crypto"
                     required
                   />
                   <Button className="crypto-gradient">
-                    Subscribe
+                    اشترك
                   </Button>
                 </form>
               </div>

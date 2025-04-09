@@ -14,20 +14,20 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-crypto-super-dark/80 border-b border-white/10">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center gap-2">
           <Bitcoin className="h-8 w-8 text-crypto" />
           <span className="text-xl font-bold crypto-text-gradient">CryptoExpert</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
-          <Link to="/" className="text-white/80 hover:text-crypto transition-colors">Home</Link>
-          <Link to="/services" className="text-white/80 hover:text-crypto transition-colors">Services</Link>
-          <Link to="/consulting" className="text-white/80 hover:text-crypto transition-colors">Consulting</Link>
-          <Link to="/about" className="text-white/80 hover:text-crypto transition-colors">About</Link>
-          <Link to="/blog" className="text-white/80 hover:text-crypto transition-colors">Blog</Link>
-          <Link to="/contact" className="text-white/80 hover:text-crypto transition-colors">Contact</Link>
-          <Button className="crypto-gradient">Book a Session</Button>
+        <div className="hidden md:flex items-center gap-6">
+          <Link to="/" className="text-white/80 hover:text-crypto transition-colors">الرئيسية</Link>
+          <Link to="/services" className="text-white/80 hover:text-crypto transition-colors">الخدمات</Link>
+          <Link to="/consulting" className="text-white/80 hover:text-crypto transition-colors">الاستشارات</Link>
+          <Link to="/about" className="text-white/80 hover:text-crypto transition-colors">من أنا</Link>
+          <Link to="/blog" className="text-white/80 hover:text-crypto transition-colors">المدونة</Link>
+          <Link to="/contact" className="text-white/80 hover:text-crypto transition-colors">تواصل معنا</Link>
+          <Button className="crypto-gradient">احجز جلسة</Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -53,45 +53,45 @@ const Navbar = () => {
               className="text-white/80 hover:text-crypto transition-colors py-3 px-4 border-b border-white/10"
               onClick={toggleMenu}
             >
-              Home
+              الرئيسية
             </Link>
             <Link 
               to="/services" 
               className="text-white/80 hover:text-crypto transition-colors py-3 px-4 border-b border-white/10"
               onClick={toggleMenu}
             >
-              Services
+              الخدمات
             </Link>
             <Link 
               to="/consulting" 
               className="text-white/80 hover:text-crypto transition-colors py-3 px-4 border-b border-white/10"
               onClick={toggleMenu}
             >
-              Consulting
+              الاستشارات
             </Link>
             <Link 
               to="/about" 
               className="text-white/80 hover:text-crypto transition-colors py-3 px-4 border-b border-white/10"
               onClick={toggleMenu}
             >
-              About
+              من أنا
             </Link>
             <Link 
               to="/blog" 
               className="text-white/80 hover:text-crypto transition-colors py-3 px-4 border-b border-white/10"
               onClick={toggleMenu}
             >
-              Blog
+              المدونة
             </Link>
             <Link 
               to="/contact" 
               className="text-white/80 hover:text-crypto transition-colors py-3 px-4 border-b border-white/10"
               onClick={toggleMenu}
             >
-              Contact
+              تواصل معنا
             </Link>
             <div className="pt-4">
-              <Button className="crypto-gradient w-full">Book a Session</Button>
+              <Button className="crypto-gradient w-full">احجز جلسة</Button>
             </div>
           </div>
         </div>
