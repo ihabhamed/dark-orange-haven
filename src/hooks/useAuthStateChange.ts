@@ -24,17 +24,12 @@ export const useAuthStateChange = () => {
 
       console.log("⚡ About to run checkUserRole...");
 
-      try {
-        // ✅ Checking admin role using user_id
-        const isUserAdmin = await checkUserRole(currentSession.user.id);
-        console.log('🔍 Admin Check → User ID:', currentSession.user.id);
-        console.log('🧠 Admin Check → Returned:', isUserAdmin);
+      // ✅ Checking admin role using user_id – no try/catch to expose all errors
+      const isUserAdmin = await checkUserRole(currentSession.user.id);
+      console.log('🔍 Admin Check → User ID:', currentSession.user.id);
+      console.log('🧠 Admin Check → Returned:', isUserAdmin);
 
-        setIsAdmin(isUserAdmin);
-      } catch (error) {
-        console.error('❌ Error checking admin status:', error);
-        setIsAdmin(false);
-      }
+      setIsAdmin(isUserAdmin);
     } else {
       console.log("❌ No session or user found – clearing state");
       setUser(null);
