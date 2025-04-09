@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { BlogPost } from '@/types/database.types';
 import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';

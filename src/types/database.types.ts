@@ -1,4 +1,7 @@
 
+// This file defines the types used in the application code
+// The database schema is defined in src/types/supabase.ts
+
 export interface Service {
   id: string;
   title: string;

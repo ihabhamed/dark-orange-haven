@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SectionHeading from '@/components/SectionHeading';
@@ -20,7 +20,7 @@ const Services = () => {
         const { data, error } = await supabase
           .from('services')
           .select('*')
-          .order('display_order', { ascending: true, nullsLast: true });
+          .order('display_order', { ascending: true });
 
         if (error) {
           throw error;

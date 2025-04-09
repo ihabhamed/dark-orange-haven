@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { Service } from '@/types/database.types';
 import {
   Table,
@@ -37,7 +36,7 @@ const ServicesList: React.FC = () => {
       const { data, error } = await supabase
         .from('services')
         .select('*')
-        .order('display_order', { ascending: true, nullsLast: true });
+        .order('display_order', { ascending: true });
 
       if (error) {
         throw error;

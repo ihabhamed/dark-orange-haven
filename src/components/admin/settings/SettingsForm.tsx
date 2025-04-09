@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import React, { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import { GlobalSetting, HomepageContent } from '@/types/database.types';
 import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
