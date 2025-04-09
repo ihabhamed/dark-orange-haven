@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/components/auth/AuthContext';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -11,16 +11,10 @@ interface AdminAuthGuardProps {
 }
 
 const AdminAuthGuard: React.FC<AdminAuthGuardProps> = ({ children }) => {
-  const { isAdmin, isLoading, user, signOut } = useAuth();
-  const [authReady, setAuthReady] = React.useState(false);
-
-  // Use an effect to determine when auth is ready
-  React.useEffect(() => {
-    if (!isLoading) {
-      // Auth state has loaded, now we can make decisions
-      setAuthReady(true);
-    }
-  }, [isLoading]);
+  const { isAdmin, isLoading, user, authChecked, signOut } = useAuth();
+  
+  // Debug logging
+  console.log('AdminAuthGuard render state:', { isLoading, authChecked, user: !!user, isAdmin });
 
   // Only show loading state when auth is still loading
   if (isLoading) {
@@ -32,13 +26,13 @@ const AdminAuthGuard: React.FC<AdminAuthGuardProps> = ({ children }) => {
   }
 
   // Auth is ready but no user is logged in
-  if (authReady && !user) {
+  if (authChecked && !user) {
     console.log('Auth ready but no user, redirecting to login');
-    return <Navigate to="/admin/login" />;
+    return <Navigate to="/admin/login" replace />;
   }
 
   // User is logged in but not admin
-  if (authReady && user && !isAdmin) {
+  if (authChecked && user && !isAdmin) {
     console.log('Auth ready, user is logged in but not admin');
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-crypto-dark p-4">
@@ -57,6 +51,16 @@ const AdminAuthGuard: React.FC<AdminAuthGuardProps> = ({ children }) => {
         >
           تسجيل الخروج
         </Button>
+      </div>
+    );
+  }
+
+  // Auth check is not complete yet
+  if (!authChecked) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-crypto-dark">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-r-transparent" />
+        <span className="ml-3 text-white">جاري التحقق من الصلاحيات...</span>
       </div>
     );
   }

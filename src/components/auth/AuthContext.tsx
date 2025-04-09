@@ -13,7 +13,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     user, 
     session, 
     isAdmin, 
-    isLoading, 
+    isLoading,
+    authChecked, 
     setIsLoading, 
     handleAuthChange 
   } = useAuthStateChange();
@@ -43,8 +44,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
+  // Log the current auth context state for debugging
+  console.log('Auth context state:', { isLoading, user: !!user, isAdmin, authChecked });
+
   return (
-    <AuthContext.Provider value={{ user, session, isAdmin, isLoading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      session, 
+      isAdmin, 
+      isLoading, 
+      authChecked,
+      signIn, 
+      signUp, 
+      signOut 
+    }}>
       {children}
     </AuthContext.Provider>
   );

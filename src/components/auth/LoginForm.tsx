@@ -9,28 +9,51 @@ import { NonAdminMessage } from './NonAdminMessage';
 import { LoginFormFields } from './LoginFormFields';
 import { SignupFormFields } from './SignupFormFields';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { user, isAdmin, isLoading } = useAuth();
+  const { user, isAdmin, isLoading, authChecked } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
-  // Monitor auth state
+  // Debug log
+  console.log('LoginForm render state:', { isLoading, authChecked, user: !!user, isAdmin });
+
+  // Monitor auth state for redirection
   useEffect(() => {
-    // Only redirect when loading is complete AND user is admin
-    if (!isLoading && user && isAdmin) {
+    // Only redirect when auth check is complete AND user is admin
+    if (authChecked && user && isAdmin) {
       console.log('User logged in and is admin, redirecting to dashboard');
-      // Use a small timeout to ensure all state updates have propagated
-      setTimeout(() => {
-        navigate('/admin', { replace: true });
-      }, 100);
+      navigate('/admin', { replace: true });
     }
-  }, [user, isAdmin, isLoading, navigate]);
+  }, [user, isAdmin, authChecked, navigate]);
+
+  // Show appropriate UI based on auth state
+  if (isLoading) {
+    return (
+      <Card className="w-full max-w-md mx-auto">
+        <CardHeader>
+          <Skeleton className="h-8 w-3/4 mb-2" />
+          <Skeleton className="h-4 w-full" />
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+        </CardContent>
+        <CardFooter>
+          <Skeleton className="h-4 w-3/4 mx-auto" />
+        </CardFooter>
+      </Card>
+    );
+  }
 
   // If the user is logged in but not admin, show a message
-  if (!isLoading && user && !isAdmin) {
+  if (authChecked && user && !isAdmin) {
+    console.log('User is logged in but not admin, showing non-admin message');
     return <NonAdminMessage email={user.email} />;
   }
 
