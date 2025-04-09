@@ -1,40 +1,24 @@
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import { AuthContextType } from '@/types/auth';
-import { useAdminCheck } from '@/hooks/useAdminCheck';
 import { useAuthActions } from '@/hooks/useAuthActions';
+import { useAuthStateChange } from '@/hooks/useAuthStateChange';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const { 
+    user, 
+    session, 
+    isAdmin, 
+    isLoading, 
+    setIsLoading, 
+    handleAuthChange 
+  } = useAuthStateChange();
   
-  const { checkUserRole } = useAdminCheck();
   const { signIn, signUp, signOut } = useAuthActions(setIsLoading);
-
-  // Function to handle auth state change
-  const handleAuthChange = async (currentSession: Session | null) => {
-    setSession(currentSession);
-    
-    if (currentSession?.user) {
-      setUser(currentSession.user);
-      
-      // Check if user is admin after setting the user
-      const isUserAdmin = await checkUserRole(currentSession.user.id);
-      console.log('User admin status:', isUserAdmin);
-      setIsAdmin(isUserAdmin);
-    } else {
-      setUser(null);
-      setIsAdmin(false);
-    }
-    
-    setIsLoading(false);
-  };
 
   useEffect(() => {
     console.log('Auth provider initializing');
