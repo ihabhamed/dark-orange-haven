@@ -28,9 +28,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Function to check if user is admin
+  const checkUserRole = async (userId: string) => {
+    try {
+      const { data: userRoles, error: rolesError } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .eq('role', 'admin')
+        .single();
+      
+      if (rolesError && rolesError.code !== 'PGRST116') {
+        console.error('Error fetching user role:', rolesError);
+        return false;
+      }
+      
+      return !!userRoles;
+    } catch (error) {
+      console.error('Error in checkUserRole:', error);
+      return false;
+    }
+  };
+
   useEffect(() => {
-    const setData = async () => {
+    const initializeAuth = async () => {
       try {
+        setIsLoading(true);
+        
+        // Get the current session
         const { data: { session }, error } = await supabase.auth.getSession();
         
         if (error) {
@@ -42,18 +67,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setUser(session.user);
           
           // Check if user is admin
-          const { data: userRoles, error: rolesError } = await supabase
-            .from('user_roles')
-            .select('role')
-            .eq('user_id', session.user.id)
-            .eq('role', 'admin')
-            .single();
-          
-          if (rolesError && rolesError.code !== 'PGRST116') {
-            console.error('Error fetching user role:', rolesError);
-          }
-          
-          setIsAdmin(!!userRoles);
+          const isUserAdmin = await checkUserRole(session.user.id);
+          setIsAdmin(isUserAdmin);
         }
       } catch (error) {
         console.error('Error getting session:', error);
@@ -62,32 +77,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     };
 
-    setData();
-
+    // Set up auth state change listener
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
       
       if (session?.user) {
         // Check if user is admin
-        const { data: userRoles, error: rolesError } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', session.user.id)
-          .eq('role', 'admin')
-          .single();
-        
-        if (rolesError && rolesError.code !== 'PGRST116') {
-          console.error('Error fetching user role:', rolesError);
-        }
-        
-        setIsAdmin(!!userRoles);
+        const isUserAdmin = await checkUserRole(session.user.id);
+        setIsAdmin(isUserAdmin);
       } else {
         setIsAdmin(false);
       }
       
       setIsLoading(false);
     });
+
+    // Initialize authentication
+    initializeAuth();
 
     return () => {
       authListener.subscription.unsubscribe();

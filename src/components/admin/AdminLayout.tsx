@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from '@/components/auth/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -12,31 +12,67 @@ import {
   Settings,
   LogOut,
   Menu,
-  X
+  X,
+  AlertTriangle
 } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
-  const { isAdmin, isLoading, signOut } = useAuth();
+  const { isAdmin, isLoading, user, signOut } = useAuth();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [showNoAdminAlert, setShowNoAdminAlert] = useState(false);
 
+  useEffect(() => {
+    // If user is logged in but not admin, show the alert
+    if (!isLoading && user && !isAdmin) {
+      setShowNoAdminAlert(true);
+    } else {
+      setShowNoAdminAlert(false);
+    }
+  }, [isLoading, user, isAdmin]);
+
+  // Loading state
   if (isLoading) {
     return (
-      <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex h-screen w-full items-center justify-center bg-crypto-dark">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-r-transparent" />
       </div>
     );
   }
 
-  if (!isAdmin) {
+  // No user, redirect to login
+  if (!user) {
     return <Navigate to="/admin/login" />;
+  }
+
+  // User is not admin, but is logged in
+  if (!isAdmin && user) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-crypto-dark p-4">
+        <Alert variant="destructive" className="max-w-md">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertTitle>غير مصرح</AlertTitle>
+          <AlertDescription>
+            أنت مسجل الدخول لكن لا تملك صلاحيات المسؤول. 
+            يرجى التواصل مع مسؤول الموقع للحصول على الصلاحيات.
+          </AlertDescription>
+        </Alert>
+        <Button 
+          variant="outline" 
+          className="mt-4"
+          onClick={signOut}
+        >
+          تسجيل الخروج
+        </Button>
+      </div>
+    );
   }
 
   const navigation = [
