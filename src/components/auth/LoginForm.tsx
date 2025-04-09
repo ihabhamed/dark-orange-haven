@@ -21,10 +21,13 @@ const LoginForm: React.FC = () => {
 
   // Monitor auth state
   useEffect(() => {
+    // Only redirect when loading is complete AND user is admin
     if (!isLoading && user && isAdmin) {
-      // If user is logged in and is admin, navigate to admin dashboard
       console.log('User logged in and is admin, redirecting to dashboard');
-      navigate('/admin', { replace: true });
+      // Use a small timeout to ensure all state updates have propagated
+      setTimeout(() => {
+        navigate('/admin', { replace: true });
+      }, 100);
     }
   }, [user, isAdmin, isLoading, navigate]);
 
@@ -33,6 +36,8 @@ const LoginForm: React.FC = () => {
     
     try {
       setIsSubmitting(true);
+      
+      // Wait for signIn to complete
       const result = await signIn(email, password);
       
       if (result.error) {
@@ -42,8 +47,13 @@ const LoginForm: React.FC = () => {
           description: result.error.message || 'فشل تسجيل الدخول، يرجى التحقق من بيانات الاعتماد والمحاولة مرة أخرى.',
           variant: 'destructive',
         });
+      } else {
+        // Successful login - will be handled by the useEffect above when auth state changes
+        toast({
+          title: 'تم تسجيل الدخول بنجاح',
+          description: 'جاري التحقق من الصلاحيات...',
+        });
       }
-      // Navigation will be handled by the useEffect monitoring auth state
     } catch (error) {
       console.error('Login error:', error);
       toast({

@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from '@/components/auth/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -27,10 +26,20 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const { isAdmin, isLoading, user, signOut } = useAuth();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  // Add authReady to track when auth checks are complete
+  const [authReady, setAuthReady] = useState(false);
 
-  console.log('AdminLayout - auth state:', { isAdmin, isLoading, user: !!user });
+  // Use an effect to determine when auth is ready
+  useEffect(() => {
+    if (!isLoading) {
+      // Auth state has loaded, now we can make decisions
+      setAuthReady(true);
+    }
+  }, [isLoading]);
 
-  // Loading state
+  console.log('AdminLayout - auth state:', { isAdmin, isLoading, authReady, user: !!user });
+
+  // Only show loading state when auth is still loading
   if (isLoading) {
     return (
       <div className="flex h-screen w-full items-center justify-center bg-crypto-dark">
@@ -39,15 +48,15 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     );
   }
 
-  // No user, redirect to login
-  if (!user) {
-    console.log('No user, redirecting to login');
+  // Auth is ready but no user is logged in
+  if (authReady && !user) {
+    console.log('Auth ready but no user, redirecting to login');
     return <Navigate to="/admin/login" />;
   }
 
-  // User is not admin, but is logged in
-  if (!isAdmin && user) {
-    console.log('User is not admin, showing unauthorized message');
+  // User is logged in but not admin
+  if (authReady && user && !isAdmin) {
+    console.log('Auth ready, user is logged in but not admin');
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-crypto-dark p-4">
         <Alert variant="destructive" className="max-w-md">
@@ -69,8 +78,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     );
   }
 
-  // At this point, user is logged in and is admin
-  console.log('User is admin, showing admin layout');
+  // User is logged in and is admin - can show admin layout
+  console.log('Auth ready, user is admin, showing admin layout');
 
   const navigation = [
     { name: 'لوحة التحكم', href: '/admin', icon: LayoutDashboard },
