@@ -29,13 +29,6 @@ useEffect(() => {
   }
 }, [user, isAdmin, isLoading, navigate]);
 
-// 👇 أضف ده بعده مباشرة
-useEffect(() => {
-  if (user && isAdmin) {
-    window.location.reload(); // حل مؤقت لإجبار التحديث بعد تسجيل الدخول
-  }
-}, [user, isAdmin]);
-
   // Show appropriate UI based on auth state
   if (isLoading) {
     return (
