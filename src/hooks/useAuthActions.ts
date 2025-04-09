@@ -33,7 +33,10 @@ export const useAuthActions = (setIsLoading: (value: boolean) => void) => {
         description: 'مرحبًا بك في لوحة التحكم',
       });
       
+      window.location.href = "/admin"; // ✅ Reload to fix context issues
+      
       return { error: null };
+
     } catch (error: any) {
       console.error('Error signing in:', error);
       setIsLoading(false);
