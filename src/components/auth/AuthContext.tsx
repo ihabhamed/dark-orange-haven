@@ -4,13 +4,19 @@ import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import { toast } from '@/hooks/use-toast';
 
+interface AuthResult {
+  error?: {
+    message: string;
+  } | null;
+}
+
 interface AuthContextType {
   user: User | null;
   session: Session | null;
   isAdmin: boolean;
   isLoading: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<AuthResult>;
+  signUp: (email: string, password: string) => Promise<AuthResult>;
   signOut: () => Promise<void>;
 }
 
@@ -88,9 +94,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (email: string, password: string): Promise<AuthResult> => {
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       
       if (error) {
         toast({
@@ -98,22 +104,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           description: error.message,
           variant: 'destructive',
         });
-        throw error;
+        return { error };
       }
       
       toast({
         title: 'تم تسجيل الدخول بنجاح',
         description: 'مرحبًا بك في لوحة التحكم',
       });
-    } catch (error) {
+      
+      return { error: null };
+    } catch (error: any) {
       console.error('Error signing in:', error);
-      throw error;
+      return { error: { message: error.message || 'حدث خطأ غير متوقع' } };
     }
   };
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string): Promise<AuthResult> => {
     try {
-      const { error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabase.auth.signUp({ email, password });
       
       if (error) {
         toast({
@@ -121,16 +129,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           description: error.message,
           variant: 'destructive',
         });
-        throw error;
+        return { error };
       }
       
       toast({
         title: 'تم إنشاء الحساب بنجاح',
         description: 'تم إرسال رابط التأكيد إلى بريدك الإلكتروني',
       });
-    } catch (error) {
+      
+      return { error: null };
+    } catch (error: any) {
       console.error('Error signing up:', error);
-      throw error;
+      return { error: { message: error.message || 'حدث خطأ غير متوقع' } };
     }
   };
 
