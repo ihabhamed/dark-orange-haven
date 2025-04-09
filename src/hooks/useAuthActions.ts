@@ -35,8 +35,9 @@ export const useAuthActions = (setIsLoading: (value: boolean) => void) => {
       
      // ✅ Reload to fix context issues
       setTimeout(() => {
-        window.location.href = "/admin";
-        }, 300);
+        window.location.assign("/admin");
+      }, 300);
+
 
       return { error: null };
 
