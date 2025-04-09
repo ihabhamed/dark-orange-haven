@@ -33,8 +33,11 @@ export const useAuthActions = (setIsLoading: (value: boolean) => void) => {
         description: 'مرحبًا بك في لوحة التحكم',
       });
       
-      window.location.href = "/admin"; // ✅ Reload to fix context issues
-      
+     // ✅ Reload to fix context issues
+      setTimeout(() => {
+        window.location.href = "/admin";
+        }, 300);
+
       return { error: null };
 
     } catch (error: any) {
