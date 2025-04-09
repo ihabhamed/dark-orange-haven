@@ -1,14 +1,42 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SectionHeading from '@/components/SectionHeading';
 import ServiceCard from '@/components/ServiceCard';
-import { services } from '@/data/services';
+import { Service } from '@/types/database.types';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const Services = () => {
+  const [services, setServices] = useState<Service[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('services')
+          .select('*')
+          .order('display_order', { ascending: true, nullsLast: true });
+
+        if (error) {
+          throw error;
+        }
+
+        setServices(data as Service[]);
+      } catch (error) {
+        console.error('Error fetching services:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -38,17 +66,28 @@ const Services = () => {
               centered
             />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service) => (
-                <ServiceCard 
-                  key={service.id}
-                  title={service.title}
-                  description={service.fullDescription || service.description}
-                  price={service.price}
-                  duration={service.duration}
-                />
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="flex justify-center py-20">
+                <div className="h-10 w-10 animate-spin rounded-full border-4 border-crypto border-r-transparent" />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {services.map((service) => (
+                  <ServiceCard 
+                    key={service.id}
+                    title={service.title}
+                    description={service.description}
+                    fullDescription={service.full_description}
+                    price={service.price}
+                    oldPrice={service.old_price}
+                    duration={service.duration}
+                    discountBadge={service.discount_badge}
+                    featured={service.featured}
+                    service={service}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </section>
         
