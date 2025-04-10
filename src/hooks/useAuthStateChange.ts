@@ -2,39 +2,30 @@ import { useState, useEffect, useCallback } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { useAdminCheck } from './useAdminCheck';
 
-console.log("🔥 useAuthStateChange.ts loaded ✅"); // ⬅️ أول ما الملف يتنفذ
+console.log("🔥 useAuthStateChange.ts loaded ✅"); // ← نتأكد إن الملف بيتنفذ فعلاً
 
-/**
- * Hook to handle authentication state changes
- */
 export const useAuthStateChange = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [authChecked, setAuthChecked] = useState(false);
-  
-  const adminCheckResult = useAdminCheck(); // ✅ استدعاء hook
-  const { checkUserRole } = adminCheckResult;
 
-  // ✅ اختبار الدالة راجعة ولا لا
-  console.log("🔄 useAdminCheck() returned:", adminCheckResult);
-  console.log("🔧 checkUserRole function is:", typeof checkUserRole);
+  const { checkUserRole } = useAdminCheck();
 
-  // ✅ Function runs on auth state change (e.g. sign in)
+  console.log("🔧 checkUserRole function type:", typeof checkUserRole);
+
   const handleAuthChange = useCallback(async (currentSession: Session | null) => {
     console.log('⚡ handleAuthChange triggered with session:', currentSession ? 'exists' : 'null');
     setSession(currentSession);
-    
+
     if (currentSession?.user) {
+      console.log("👤 Setting user:", currentSession.user.email);
       setUser(currentSession.user);
 
-      console.log("⚡ About to run checkUserRole...");
-
-      // ✅ Checking admin role using user_id – no try/catch to expose all errors
+      console.log("⚡ Running checkUserRole...");
       const isUserAdmin = await checkUserRole(currentSession.user.id);
-      console.log('🔍 Admin Check → User ID:', currentSession.user.id);
-      console.log('🧠 Admin Check → Returned:', isUserAdmin);
+      console.log('🧠 Admin Check → Result:', isUserAdmin);
 
       setIsAdmin(isUserAdmin);
     } else {
@@ -43,19 +34,17 @@ export const useAuthStateChange = () => {
       setIsAdmin(false);
     }
 
-    // ✅ Mark auth check complete
     setAuthChecked(true);
     setIsLoading(false);
   }, [checkUserRole]);
 
-  // 🐞 Debug logs to follow auth state changes
   useEffect(() => {
-    console.log("🧾 Auth context state:", {
+    console.log("🧾 Auth context updated:", {
       isLoading,
-      user: !!user,
+      user,
       isAdmin,
       authChecked,
-      session: !!session,
+      session,
     });
   }, [isLoading, user, isAdmin, authChecked, session]);
 
@@ -69,6 +58,6 @@ export const useAuthStateChange = () => {
     handleAuthChange,
     setUser,
     setSession,
-    setIsAdmin
+    setIsAdmin,
   };
 };
