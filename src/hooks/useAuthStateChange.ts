@@ -1,9 +1,10 @@
+// 📄 src/hooks/useAuthStateChange.ts
+
 import { useState, useEffect, useCallback } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { useAdminCheck } from './useAdminCheck';
 
 console.log("🔥 useAuthStateChange.ts loaded ✅");
-console.log("✅ useAdminCheck function:", useAdminCheck);
 
 export const useAuthStateChange = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -14,16 +15,12 @@ export const useAuthStateChange = () => {
 
   const { checkUserRole } = useAdminCheck();
 
-  console.log("🔧 checkUserRole function type:", typeof checkUserRole);
-
   const handleAuthChange = useCallback(async (currentSession: Session | null) => {
     console.log("🔥🔥🔥 handleAuthChange STARTED with session:", currentSession);
     setSession(currentSession);
 
     if (currentSession?.user) {
       console.log("✅ Entered currentSession.user block");
-      console.log("👤 Setting user:", currentSession.user.email);
-
       setUser(currentSession.user);
 
       try {
@@ -36,7 +33,6 @@ export const useAuthStateChange = () => {
         setIsAdmin(false);
       }
     } else {
-      console.log("❌ No session or user found – clearing state");
       setUser(null);
       setIsAdmin(false);
     }
