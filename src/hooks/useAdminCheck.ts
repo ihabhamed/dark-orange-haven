@@ -7,26 +7,29 @@ import { supabase } from '@/lib/supabase';
  */
 export const useAdminCheck = () => {
   const checkUserRole = async (userId: string): Promise<boolean> => {
-    try {
-      console.log("🟡 Running checkUserRole for user:", userId);
+    console.log("🟡 Running checkUserRole for user:", userId);
 
-      const { data: userRoles, error: rolesError } = await supabase
+    try {
+      const { data, error } = await supabase
         .from('user_roles')
         .select('role')
         .eq('user_id', userId)
-        .maybeSingle(); // منع كسر الدالة لو مفيش نتيجة
+        .maybeSingle();
 
-      console.log("📦 Role fetched:", userRoles);
-      console.log("❌ Role fetch error:", rolesError);
+      console.log("📦 Supabase response → data:", data);
+      console.log("⚠️ Supabase response → error:", error);
 
-      if (rolesError && rolesError.code !== 'PGRST116') {
-        console.error('🔴 Error fetching user role:', rolesError);
+      if (error && error.code !== 'PGRST116') {
+        console.error("🚫 Error fetching role:", error.message);
         return false;
       }
 
-      return userRoles?.role === 'admin';
-    } catch (error) {
-      console.error("🔥 checkUserRole failed with error:", error);
+      const isAdmin = data?.role === 'admin';
+      console.log("✅ Final result → isAdmin:", isAdmin);
+
+      return isAdmin;
+    } catch (err) {
+      console.error("🔥 Unexpected error in checkUserRole:", err);
       return false;
     }
   };
