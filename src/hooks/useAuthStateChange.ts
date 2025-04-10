@@ -17,10 +17,7 @@ export const useAuthStateChange = () => {
   console.log("🔧 checkUserRole function type:", typeof checkUserRole);
 
   const handleAuthChange = useCallback(async (currentSession: Session | null) => {
-    // 🆕 أول لوج بعد ما السيشن يتغير
     console.log("🔥🔥🔥 handleAuthChange STARTED with session:", currentSession);
-
-    console.log('⚡ handleAuthChange triggered with session:', currentSession ? 'exists' : 'null');
     setSession(currentSession);
 
     if (currentSession?.user) {
@@ -29,11 +26,15 @@ export const useAuthStateChange = () => {
 
       setUser(currentSession.user);
 
-      console.log("⚡ Running checkUserRole...");
-      const isUserAdmin = await checkUserRole(currentSession.user.id);
-      console.log('🧠 Admin Check → Result:', isUserAdmin);
-
-      setIsAdmin(isUserAdmin);
+      try {
+        console.log("⚡ Running checkUserRole...");
+        const isUserAdmin = await checkUserRole(currentSession.user.id);
+        console.log("✅ checkUserRole اشتغل ورجع:", isUserAdmin);
+        setIsAdmin(isUserAdmin);
+      } catch (err) {
+        console.error("❌ checkUserRole FAILED:", err);
+        setIsAdmin(false);
+      }
     } else {
       console.log("❌ No session or user found – clearing state");
       setUser(null);
