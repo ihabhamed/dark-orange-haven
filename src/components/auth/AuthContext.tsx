@@ -1,65 +1,71 @@
+// ✅ AuthContext.tsx
+
 import React, { createContext, useContext, useEffect } from 'react';
-import { Session, User } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supabase';
 import { AuthContextType } from '@/types/auth';
+import { supabase } from '@/lib/supabase';
 import { useAuthActions } from '@/hooks/useAuthActions';
 import { useAuthStateChange } from '@/hooks/useAuthStateChange';
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { 
-    user, 
-    session, 
-    isAdmin, 
+  const {
+    user,
+    session,
+    isAdmin,
     isLoading,
-    authChecked, 
-    setIsLoading, 
-    handleAuthChange 
+    authChecked,
+    setIsLoading,
+    handleAuthChange
   } = useAuthStateChange();
-  console.log("🚀 useAuthStateChange hook has been called");
 
-  
   const { signIn, signUp, signOut } = useAuthActions(setIsLoading);
 
   useEffect(() => {
-    console.log('Auth provider initializing');
+    console.log("🚀 AuthProvider mounted");
+
     setIsLoading(true);
-    
-    // ✅ Setup auth state change listener
+
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, currentSession) => {
-        console.log('Auth state changed:', event);
+        console.log("🔄 Auth state changed:", event);
         await handleAuthChange(currentSession);
       }
     );
 
-    // ✅ Check for existing session on load
     supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
-      console.log("📦 Current session (from getSession):", currentSession);
-      console.log("🧠 User ID (from getSession):", currentSession?.user?.id);
+      console.log("📦 Initial session:", currentSession);
       await handleAuthChange(currentSession);
     });
 
     return () => {
-      authListener.subscription.unsubscribe();
+      authListener?.subscription.unsubscribe();
     };
-  }, []);
+  }, [handleAuthChange, setIsLoading]);
 
-  // 🐞 Log the current auth context state
-  console.log('Auth context state:', { isLoading, user: !!user, isAdmin, authChecked });
+  useEffect(() => {
+    console.log("🌍 AuthContext State:", {
+      isLoading,
+      user,
+      isAdmin,
+      authChecked,
+      session
+    });
+  }, [isLoading, user, isAdmin, authChecked, session]);
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      session, 
-      isAdmin, 
-      isLoading, 
-      authChecked,
-      signIn, 
-      signUp, 
-      signOut 
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        session,
+        isAdmin,
+        isLoading,
+        authChecked,
+        signIn,
+        signUp,
+        signOut
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -67,10 +73,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
-  
   return context;
 };
