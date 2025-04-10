@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '@/components/auth/AuthContext';
+import { useAuth } from './AuthContext';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle } from 'lucide-react';
@@ -12,18 +11,18 @@ interface AdminAuthGuardProps {
 
 const AdminAuthGuard: React.FC<AdminAuthGuardProps> = ({ children }) => {
   const { isAdmin, isLoading, user, authChecked, signOut } = useAuth();
-  
+
   // Debug logging
   console.log('AdminAuthGuard render state:', { isLoading, authChecked, user: !!user, isAdmin });
 
   // Only show loading state when auth is still loading
-if (isLoading || user === undefined || isAdmin === undefined) {
-  return (
-    <div className="flex h-screen w-full items-center justify-center bg-crypto-dark">
-      <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-r-transparent" />
-    </div>
-  );
-}
+  if (isLoading || user === undefined || isAdmin === undefined) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-crypto-dark">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-r-transparent" />
+      </div>
+    );
+  }
 
   // Auth is ready but no user is logged in
   if (authChecked && !user) {
