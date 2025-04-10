@@ -23,6 +23,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     console.log('🧠 AuthProvider initializing...');
     setIsLoading(true);
 
+    // 📌 Subscribe to Supabase auth changes
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         console.log('🔄 Auth state changed:', event);
@@ -30,15 +31,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     );
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      console.log("📦 Initial session:", session);
-      await handleAuthChange(session);
-    });
+    // 📌 Run initial session check on mount
+    supabase.auth.getSession()
+      .then(async ({ data: { session } }) => {
+        console.log("📦 Initial session:", session);
+        await handleAuthChange(session);
+      })
+      .catch((err) => {
+        console.error("❌ Error fetching session:", err);
+      });
 
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, []);
+  }, [handleAuthChange]);
 
   return (
     <AuthContext.Provider value={{
