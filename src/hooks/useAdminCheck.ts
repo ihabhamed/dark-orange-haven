@@ -1,6 +1,6 @@
-console.log("🔥 useAdminCheck.ts loaded ✅");
-
 import { supabase } from '@/lib/supabase';
+
+console.log("🔥 useAdminCheck.ts loaded ✅");
 
 /**
  * Hook to check if a user has admin role
@@ -28,6 +28,8 @@ export const useAdminCheck = () => {
         console.error("🚫 Error fetching role:", error.message);
         return false;
       }
+
+      console.log("🧪 Role data BEFORE RETURN:", data);
 
       const isAdmin = data.role === 'admin';
       console.log("✅ Final result → isAdmin:", isAdmin);
