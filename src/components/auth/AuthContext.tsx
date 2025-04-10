@@ -17,6 +17,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading, 
     handleAuthChange 
   } = useAuthStateChange();
+  console.log("🚀 useAuthStateChange hook has been called");
+
   
   const { signIn, signUp, signOut } = useAuthActions(setIsLoading);
 
