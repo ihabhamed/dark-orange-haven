@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Session, User } from '@supabase/supabase-js';
-// بدل الاستيراد المباشر هنطبع الموديول كله
-import * as adminModule from './useAdminCheck';
+import { useAdminCheck } from './useAdminCheck';
 
-console.log("🔥 useAuthStateChange.ts loaded ✅"); // ← تأكيد تحميل الملف
-console.log("✅ adminModule content:", adminModule); // ← اختبار الملف التاني
+console.log("🔥 useAuthStateChange.ts loaded ✅");
+console.log("✅ useAdminCheck function:", useAdminCheck);
 
 export const useAuthStateChange = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -13,7 +12,8 @@ export const useAuthStateChange = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [authChecked, setAuthChecked] = useState(false);
 
-  const { checkUserRole } = adminModule;
+  // ✅ هنا الصح
+  const { checkUserRole } = useAdminCheck();
 
   console.log("🔧 checkUserRole function type:", typeof checkUserRole);
 
