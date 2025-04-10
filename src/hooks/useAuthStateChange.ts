@@ -1,5 +1,3 @@
-console.log("🔥🔥🔥 handleAuthChange STARTED with session:", currentSession);
-
 import { useState, useEffect, useCallback } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { useAdminCheck } from './useAdminCheck';
@@ -14,17 +12,21 @@ export const useAuthStateChange = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [authChecked, setAuthChecked] = useState(false);
 
-  // ✅ هنا الصح
   const { checkUserRole } = useAdminCheck();
 
   console.log("🔧 checkUserRole function type:", typeof checkUserRole);
 
   const handleAuthChange = useCallback(async (currentSession: Session | null) => {
+    // 🆕 أول لوج بعد ما السيشن يتغير
+    console.log("🔥🔥🔥 handleAuthChange STARTED with session:", currentSession);
+
     console.log('⚡ handleAuthChange triggered with session:', currentSession ? 'exists' : 'null');
     setSession(currentSession);
 
     if (currentSession?.user) {
+      console.log("✅ Entered currentSession.user block");
       console.log("👤 Setting user:", currentSession.user.email);
+
       setUser(currentSession.user);
 
       console.log("⚡ Running checkUserRole...");
