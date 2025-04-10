@@ -1,3 +1,5 @@
+console.log("🔥 useAdminCheck.ts loaded ✅");
+
 import { supabase } from '@/lib/supabase';
 
 /**
