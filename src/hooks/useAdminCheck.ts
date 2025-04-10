@@ -14,17 +14,22 @@ export const useAdminCheck = () => {
         .from('user_roles')
         .select('role')
         .eq('user_id', userId)
-        .maybeSingle();
+        .single(); // ✅ استخدم single بدلاً من maybeSingle
 
       console.log("📦 Supabase response → data:", data);
       console.log("⚠️ Supabase response → error:", error);
 
-      if (error && error.code !== 'PGRST116') {
+      if (!data && !error) {
+        console.warn("⚠️ No data and no error — check your RLS policy?");
+        return false;
+      }
+
+      if (error) {
         console.error("🚫 Error fetching role:", error.message);
         return false;
       }
 
-      const isAdmin = data?.role === 'admin';
+      const isAdmin = data.role === 'admin';
       console.log("✅ Final result → isAdmin:", isAdmin);
 
       return isAdmin;
