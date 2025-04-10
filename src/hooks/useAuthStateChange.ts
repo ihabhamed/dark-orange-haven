@@ -1,3 +1,5 @@
+console.log("🔥🔥🔥 handleAuthChange STARTED with session:", currentSession);
+
 import { useState, useEffect, useCallback } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { useAdminCheck } from './useAdminCheck';
