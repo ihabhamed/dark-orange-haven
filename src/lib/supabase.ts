@@ -1,14 +1,31 @@
 
-import { createClient } from '@supabase/supabase-js';
-import type { Database } from '@/types/supabase';
+// Mock Supabase client for frontend-only mode
+console.log('🚨 Using mock Supabase client - No backend connection');
 
-const SUPABASE_URL = "https://cewubqlbugfypzoekodd.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNld3VicWxidWdmeXB6b2Vrb2RkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQxNzkzMDUsImV4cCI6MjA1OTc1NTMwNX0.NfTbcXsS79Rrsq0IhT6l4-0xFzV_nHXlwepMMjq-c1c";
-
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+export const supabase = {
   auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    storage: localStorage
+    getSession: async () => ({ data: { session: null } }),
+    onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
+    signInWithPassword: async () => ({ data: null, error: null }),
+    signUp: async () => ({ data: null, error: null }),
+    signOut: async () => ({ error: null })
+  },
+  from: () => ({
+    select: () => ({
+      eq: () => ({ single: async () => ({ data: null, error: null }) })
+    }),
+    insert: () => ({ error: null }),
+    update: () => ({ eq: () => ({ error: null }) }),
+    delete: () => ({ eq: () => ({ error: null }) }),
+    order: () => ({ data: [], error: null })
+  }),
+  storage: {
+    from: () => ({
+      upload: async () => ({ error: null }),
+      getPublicUrl: () => ({ data: { publicUrl: '' } })
+    })
+  },
+  functions: {
+    invoke: async () => ({ data: null, error: null })
   }
-});
+};

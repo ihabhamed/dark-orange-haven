@@ -1,55 +1,23 @@
-// 📄 src/hooks/useAuthStateChange.ts
 
-import { useState, useEffect, useCallback } from 'react';
-import { Session, User } from '@supabase/supabase-js';
-import { useAdminCheck } from './useAdminCheck';
-
-console.log("🔥 useAuthStateChange.ts loaded ✅");
+// Mock auth state change hook for frontend-only mode
+import { useState, useCallback } from 'react';
 
 export const useAuthStateChange = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [authChecked, setAuthChecked] = useState(false);
+  const [user, setUser] = useState(null);
+  const [session, setSession] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(true); // Always admin in frontend-only mode
+  const [isLoading, setIsLoading] = useState(false);
+  const [authChecked, setAuthChecked] = useState(true);
 
-  const { checkUserRole } = useAdminCheck();
+  console.log("🔥 useAuthStateChange.ts loaded in frontend-only mode ✅");
 
-  const handleAuthChange = useCallback(async (currentSession: Session | null) => {
-    console.log("🔥🔥🔥 handleAuthChange STARTED with session:", currentSession);
-    setSession(currentSession);
-
-    if (currentSession?.user) {
-      console.log("✅ Entered currentSession.user block");
-      setUser(currentSession.user);
-
-      try {
-        console.log("⚡ Running checkUserRole...");
-        const isUserAdmin = await checkUserRole(currentSession.user.id);
-        console.log("✅ checkUserRole اشتغل ورجع:", isUserAdmin);
-        setIsAdmin(isUserAdmin);
-      } catch (err) {
-        console.error("❌ checkUserRole FAILED:", err);
-        setIsAdmin(false);
-      }
-    } else {
-      setUser(null);
-      setIsAdmin(false);
-    }
-
+  const handleAuthChange = useCallback(async () => {
+    console.log("🔥 Mock handleAuthChange - no backend connection");
+    // Always set authChecked to true in frontend-only mode
     setAuthChecked(true);
     setIsLoading(false);
-  }, [checkUserRole]);
-
-  useEffect(() => {
-    console.log("🧾 Auth context updated:", {
-      isLoading,
-      user,
-      isAdmin,
-      authChecked,
-      session,
-    });
-  }, [isLoading, user, isAdmin, authChecked, session]);
+    return;
+  }, []);
 
   return {
     user,

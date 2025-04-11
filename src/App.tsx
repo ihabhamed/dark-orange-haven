@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,12 +26,20 @@ import Settings from "./pages/admin/Settings";
 
 const queryClient = new QueryClient();
 
+// Frontend-only mode banner component
+const FrontendModeAlert = () => (
+  <div className="bg-amber-100 text-amber-900 p-2 text-center text-sm">
+    تشغيل وضع الواجهة الأمامية فقط - لا يوجد اتصال بقاعدة البيانات
+  </div>
+);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <div dir="rtl" lang="ar" className="font-arabic">
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <FrontendModeAlert />
         <BrowserRouter>
           <Routes>
             {/* Public routes */}

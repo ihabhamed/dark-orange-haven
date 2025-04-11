@@ -1,6 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart4, Users, FileText, MessageSquare } from 'lucide-react';
 
@@ -25,70 +24,18 @@ const StatCard: React.FC<{
 );
 
 const Dashboard: React.FC = () => {
-  const [services, setServices] = useState(0);
-  const [blogPosts, setBlogPosts] = useState(0);
-  const [requests, setRequests] = useState(0);
-  const [pendingRequests, setPendingRequests] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Count services
-        const { count: servicesCount, error: servicesError } = await supabase
-          .from('services')
-          .select('*', { count: 'exact', head: true });
-
-        if (servicesError) throw servicesError;
-        setServices(servicesCount || 0);
-
-        // Count blog posts
-        const { count: blogCount, error: blogError } = await supabase
-          .from('blog_posts')
-          .select('*', { count: 'exact', head: true });
-
-        if (blogError) throw blogError;
-        setBlogPosts(blogCount || 0);
-
-        // Count all requests
-        const { count: requestsCount, error: requestsError } = await supabase
-          .from('consultation_requests')
-          .select('*', { count: 'exact', head: true });
-
-        if (requestsError) throw requestsError;
-        setRequests(requestsCount || 0);
-
-        // Count pending requests
-        const { count: pendingCount, error: pendingError } = await supabase
-          .from('consultation_requests')
-          .select('*', { count: 'exact', head: true })
-          .eq('status', 'pending');
-
-        if (pendingError) throw pendingError;
-        setPendingRequests(pendingCount || 0);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="flex h-64 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-r-transparent" />
-      </div>
-    );
-  }
+  // Mock data for frontend-only mode
+  const services = 5;
+  const blogPosts = 3;
+  const requests = 7;
+  const pendingRequests = 2;
 
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-3xl font-bold tracking-tight">لوحة التحكم</h2>
         <p className="text-muted-foreground">نظرة عامة على موقعك والإحصائيات.</p>
+        <p className="text-sm text-amber-500 mt-2">وضع الواجهة الأمامية فقط - البيانات وهمية</p>
       </div>
 
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
@@ -122,15 +69,15 @@ const Dashboard: React.FC = () => {
         <Card>
           <CardHeader>
             <CardTitle>مرحبًا بك في لوحة التحكم</CardTitle>
-            <CardDescription>من هنا يمكنك إدارة جميع محتويات موقعك</CardDescription>
+            <CardDescription>وضع الواجهة الأمامية فقط - لا يوجد اتصال بقاعدة البيانات</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>يمكنك من خلال لوحة التحكم:</p>
+            <p>هذا نموذج لواجهة المستخدم فقط بدون اتصال بالخلفية:</p>
             <ul className="list-disc mr-6 mt-2 space-y-1">
-              <li>إدارة الخدمات وتعديلها</li>
-              <li>إضافة وتحرير مقالات المدونة</li>
-              <li>متابعة طلبات الاستشارات الواردة</li>
-              <li>تعديل إعدادات الموقع وتخصيصه</li>
+              <li>جميع البيانات المعروضة هي بيانات وهمية للعرض فقط</li>
+              <li>وظائف تسجيل الدخول وإدارة المستخدمين معطلة</li>
+              <li>لا يتم حفظ أي تغييرات تقوم بها</li>
+              <li>يمكنك استعراض واجهة المستخدم فقط</li>
             </ul>
           </CardContent>
         </Card>
@@ -142,13 +89,11 @@ const Dashboard: React.FC = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {pendingRequests > 0 && (
-                <div className="rounded-md bg-amber-500/10 p-3 text-amber-500">
-                  <p className="font-medium">يوجد {pendingRequests} طلب استشارة بانتظار المراجعة</p>
-                </div>
-              )}
+              <div className="rounded-md bg-amber-500/10 p-3 text-amber-500">
+                <p className="font-medium">وضع الواجهة الأمامية فقط - لا يتم حفظ أي تغييرات</p>
+              </div>
               <div className="rounded-md bg-blue-500/10 p-3 text-blue-500">
-                <p className="font-medium">تذكر تحديث محتوى الموقع بانتظام لتحسين تجربة المستخدم</p>
+                <p className="font-medium">يمكنك استعراض التصميم والواجهة فقط</p>
               </div>
             </div>
           </CardContent>
