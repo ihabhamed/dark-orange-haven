@@ -35,11 +35,7 @@ const ConsultationRequestForm: React.FC<ConsultationRequestFormProps> = ({ servi
     try {
       // Make sure required fields are filled
       if (!formData.name || !formData.email) {
-        toast({
-          title: 'حقول مطلوبة',
-          description: 'يرجى ملء جميع الحقول المطلوبة.',
-          variant: 'destructive',
-        });
+        toast();
         setIsSubmitting(false);
         return;
       }
@@ -59,10 +55,7 @@ const ConsultationRequestForm: React.FC<ConsultationRequestFormProps> = ({ servi
         throw error;
       }
 
-      toast({
-        title: 'تم إرسال طلبك بنجاح',
-        description: 'سنتواصل معك في أقرب وقت ممكن.',
-      });
+      toast();
 
       // Reset form
       setFormData({
@@ -73,11 +66,7 @@ const ConsultationRequestForm: React.FC<ConsultationRequestFormProps> = ({ servi
       });
     } catch (error) {
       console.error('Error submitting consultation request:', error);
-      toast({
-        title: 'خطأ في إرسال الطلب',
-        description: 'حدث خطأ أثناء محاولة إرسال طلبك، يرجى المحاولة مرة أخرى.',
-        variant: 'destructive',
-      });
+      toast();
     } finally {
       setIsSubmitting(false);
     }

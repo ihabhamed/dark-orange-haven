@@ -17,10 +17,11 @@ const Services = () => {
     const fetchServices = async () => {
       try {
         setIsLoading(true);
+        // In frontend-only mode, mock data will be returned
         const { data, error } = await supabase
           .from('services')
-          .select('*')
-          .order('display_order', { ascending: true });
+          .select()
+          .order();
 
         if (error) {
           throw error;

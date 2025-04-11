@@ -12,7 +12,8 @@ export const supabase = {
   },
   from: () => ({
     select: () => ({
-      eq: () => ({ single: async () => ({ data: null, error: null }) })
+      eq: () => ({ single: async () => ({ data: null, error: null }) }),
+      order: () => ({ data: [], error: null })
     }),
     insert: () => ({ error: null }),
     update: () => ({ eq: () => ({ error: null }) }),

@@ -1,3 +1,4 @@
+
 // ✅ AuthContext.tsx
 
 import React, { createContext, useContext, useEffect } from 'react';
@@ -29,13 +30,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, currentSession) => {
         console.log("🔄 Auth state changed:", event);
-        await handleAuthChange(currentSession);
+        await handleAuthChange();
       }
     );
 
     supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
       console.log("📦 Initial session:", currentSession);
-      await handleAuthChange(currentSession);
+      await handleAuthChange();
     });
 
     return () => {

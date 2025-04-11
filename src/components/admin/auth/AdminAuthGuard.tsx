@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import { useAuth } from '@/components/auth/AuthContext';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle } from 'lucide-react';

@@ -1,71 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { AlertTriangle } from 'lucide-react';
 
-interface AdminAuthGuardProps {
-  children: React.ReactNode;
-}
+import React, { useState } from 'react';
+import { useAuth } from '@/components/auth/AuthContext';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { LoginFormFields } from './LoginFormFields';
+import { SignupFormFields } from './SignupFormFields';
 
-const AdminAuthGuard: React.FC<AdminAuthGuardProps> = ({ children }) => {
-  const { isAdmin, isLoading, user, authChecked, signOut } = useAuth();
+const LoginForm: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('login');
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Debug logging
-  console.log('AdminAuthGuard render state:', { isLoading, authChecked, user: !!user, isAdmin });
+  console.log('Login form is rendered');
 
-  // Only show loading state when auth is still loading
-  if (isLoading || user === undefined || isAdmin === undefined) {
-    return (
-      <div className="flex h-screen w-full items-center justify-center bg-crypto-dark">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-r-transparent" />
-      </div>
-    );
-  }
-
-  // Auth is ready but no user is logged in
-  if (authChecked && !user) {
-    console.log('Auth ready but no user, redirecting to login');
-    return <Navigate to="/admin/login" replace />;
-  }
-
-  // User is logged in but not admin
-  if (authChecked && user && !isAdmin) {
-    console.log('Auth ready, user is logged in but not admin');
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-crypto-dark p-4">
-        <Alert variant="destructive" className="max-w-md">
-          <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>غير مصرح</AlertTitle>
-          <AlertDescription>
-            أنت مسجل الدخول لكن لا تملك صلاحيات المسؤول. 
-            يرجى التواصل مع مسؤول الموقع للحصول على الصلاحيات.
-          </AlertDescription>
-        </Alert>
-        <Button 
-          variant="outline" 
-          className="mt-4"
-          onClick={signOut}
-        >
-          تسجيل الخروج
-        </Button>
-      </div>
-    );
-  }
-
-  // Auth check is not complete yet
-  if (!authChecked) {
-    return (
-      <div className="flex h-screen w-full items-center justify-center bg-crypto-dark">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-r-transparent" />
-        <span className="ml-3 text-white">جاري التحقق من الصلاحيات...</span>
-      </div>
-    );
-  }
-
-  // User is logged in and is admin - can show admin layout
-  return <>{children}</>;
+  return (
+    <Card className="w-full glass-card">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl font-bold crypto-text-gradient">تسجيل الدخول</CardTitle>
+        <CardDescription>
+          قم بتسجيل الدخول أو إنشاء حساب جديد
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Tabs defaultValue="login" value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="grid w-full grid-cols-2 mb-6">
+            <TabsTrigger value="login">تسجيل الدخول</TabsTrigger>
+            <TabsTrigger value="signup">إنشاء حساب</TabsTrigger>
+          </TabsList>
+          <TabsContent value="login">
+            <LoginFormFields
+              email={loginEmail}
+              setEmail={setLoginEmail}
+              password={loginPassword}
+              setPassword={setLoginPassword}
+              isSubmitting={isSubmitting}
+              setIsSubmitting={setIsSubmitting}
+            />
+          </TabsContent>
+          <TabsContent value="signup">
+            <SignupFormFields
+              email={signupEmail}
+              setEmail={setSignupEmail}
+              password={signupPassword}
+              setPassword={setSignupPassword}
+              isSubmitting={isSubmitting}
+              setIsSubmitting={setIsSubmitting}
+            />
+          </TabsContent>
+        </Tabs>
+      </CardContent>
+    </Card>
+  );
 };
 
-export default AdminAuthGuard;
+export default LoginForm;
